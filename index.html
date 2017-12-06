@@ -1,0 +1,50 @@
+
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+        <meta​ name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <link rel="stylesheet" href="normalize.css">
+        <link rel="stylesheet" href="style.css">
+        <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
+        <title> cartes cartes cartes </title>
+    </head>
+
+    <!--
+    regles de syntaxe :
+    - id et class en minuscule, mots séparés par des tirets "-"
+    - chaque id est assigné à un élément unique
+    - chaque élément a un id au max 
+     -->
+
+    <body>
+    <div id="wrapper">
+        <h1 id="site-title">PMU IMAC</h1>
+        <h1 id="site-description">Parions race !</h1>
+        
+        <div id="players-board"> 
+            <!-- ici : dropdown nombre de joueurs -->
+            <h2 class ="field-title">Nom :</h2>
+            <h2 class ="field-title">Cheval :</h2>
+            <h2 class ="field-title">Mise :</h2>
+
+            <div id="players-holder">
+                <!-- ici : liste des joueurs -->
+                <!-- classes pour activer les joueurs  : player-active -->
+            </div>
+        </div>
+
+        <div id="buttons-holder">
+            <!-- ici : bouton start -->
+            <!-- ici : bouton règles -->
+        </div>
+
+        <div id="regles">
+            <!-- ici : les règles -->
+        </div>
+    </div>
+      
+    <script src="main.js"></script>
+    </body>
+
+</html>
