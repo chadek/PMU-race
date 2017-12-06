@@ -24,9 +24,32 @@
         
         <div id="players-board"> 
             <!-- ici : dropdown nombre de joueurs -->
-            <h2 class ="field-title">Nom :</h2>
-            <h2 class ="field-title">Cheval :</h2>
-            <h2 class ="field-title">Mise :</h2>
+          
+               <form id="form" method="post">
+                <ul>
+                    <li class="select-nbre-joueurs">
+                        <select id="nbre-joueurs">
+                            <option selected disabled> Nbre de joueurs </option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                        </select>
+
+                        <h2 class ="field-title">Nom :</h2>
+                        <h2 class ="field-title">Cheval :</h2>
+                        <h2 class ="field-title">Mise :</h2>
+
+                        <p class="name-player" id="joueur1">Joueur 1 :</p><input id="input-player" name="player-x" type="text"/><select id="">
+
+                    </li>
+                </ul>
+                <input id="inputSubmit" class="bold" type="submit" value="Démarrer la course !">
+            </form>
 
             <div id="players-holder">
                 <!-- ici : liste des joueurs -->
