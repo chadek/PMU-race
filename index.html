@@ -21,13 +21,11 @@
      -->
 
     <body>
-    <div id="wrapper">
-        <h1 id="site-title">PMU IMAC</h1>
-        <h1 id="site-description">Parions race !</h1>
-        
-        <div id="players-board"> 
-            <!-- ici : dropdown nombre de joueurs -->
-          
+        <div id="wrapper">
+            <img id="horse" class="horse" alt="picture of the default character" src="img/horse.png"/>
+            <h1 id="site-title">PMU IMAC</h1>
+            <h1 id="site-description">Parions race !</h1>
+
                <form id="form" method="post">
                 <ul>
                     <li class="select-nbre-joueurs">
@@ -42,35 +40,87 @@
                             <option value="7">7</option>
                             <option value="8">8</option>
                         </select>
-
-                        <h2 class ="field-title">Nom :</h2>
-                        <h2 class ="field-title">Cheval :</h2>
-                        <h2 class ="field-title">Mise :</h2>
-
-                        <p class="name-player" id="joueur1">Joueur 1 :</p><input id="input-player" name="player-x" type="text"/><select id="">
-
                     </li>
                 </ul>
-                <input id="inputSubmit" class="bold" type="submit" value="Démarrer la course !">
-            </form>
+            
+                <div id="players-board" class="grid-1">  <!-- 1ère grid -->
+                    <!-- J'essaie de faire une grid pour disposer nos éléments proprement dans la page-->
+                    <!-- ici : dropdown nombre de joueurs -->
+              
+                            <h2 class ="field-title">Nom :</h2>
+                            <p class="name-player" id="joueur1">Joueur 1 :</p><input id="input-player1" name="player-x" type="text"/>
+                       <!-- <p classes="name-player" id="joueur2">Joueur 2 :</p><input id="input-player2" name="player-x" type="text"/>
+                            <p class="name-player" id="joueur3">Joueur 3 :</p><input id="input-player3" name="player-x" type="text"/>
+                            <p class="name-player" id="joueur4">Joueur 4 :</p><input id="input-player4" name="player-x" type="text"/>
+                            <p class="name-player" id="joueur5">Joueur 5 :</p><input id="input-player5" name="player-x" type="text"/>
+                            <p class="name-player" id="joueur6">Joueur 6 :</p><input id="input-player6" name="player-x" type="text"/>
+                            <p class="name-player" id="joueur7">Joueur 7 :</p><input id="input-player7" name="player-x" type="text"/>
+                            <p class="name-player" id="joueur8">Joueur 8 :</p><input id="input-player8" name="player-x" type="text"/> -->
 
-            <div id="players-holder">
-                <!-- ici : liste des joueurs -->
-                <!-- classes pour activer les joueurs  : player-active -->
-            </div>
-        </div>
+                            <h2 class ="field-title">Poulain :</h2>
+                            <ul>
+                                <li class="select-mise"> 
+                                    <select id="cheval" class="mise">
+                                        <option selected disabled>Choix</option>
+                                        <option value="trefle">♣</option>
+                                        <option value="coeur" class="rouge">♥</option>
+                                        <option value="carreau" class="rouge">♦</option>
+                                        <option value="pique">♠</option>
+                                    </select>
+                                </li>
+                            </ul>
 
-        <div id="buttons-holder">
-            <!-- ici : bouton start -->
-            <!-- ici : bouton règles -->
-        </div>
+                            <h2 class ="field-title">Mise :</h2>
+                                <ul>
+                                    <li class="select-mise">
+                                        <select id="nbre-mise">
+                                            <option selected disabled> Choix </option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                            <option value="7">7</option>
+                                            <option value="8">8</option>
+                                            <option value="9">9</option>
+                                            <option value="10">10</option>
+                                            <option value="11">11</option>
+                                            <option value="12">12</option>
+                                            <option value="13">13</option>
+                                            <option value="14">14</option>
+                                            <option value="15">15</option>
+                                            <option value="16">16</option>
+                                            <option value="17">17</option>
+                                            <option value="18">18</option>
+                                            <option value="19">19</option>
+                                            <option value="20">20</option>
+                                        </select>
+                                    </li>
+                                </ul>
+                </form>
 
-        <div id="regles">
-            <!-- ici : les règles -->
-        </div>
-    </div>
-      
-    <script src="main.js"></script>
+                <div id="players-holder">
+                    <!-- ici : liste des joueurs -->
+                    <!-- classes pour activer les joueurs  : player-active -->
+             
+                </div>
+                </div>
+                    <div class="grid-2"> <!-- 2ème grille pour les deux boutons du bas -->
+                        <div id="buttons-holder">
+                            <input id="input-start" class="bold" type="submit" value="Démarrer la course !">
+                            <input id="input-rules" class="bold" type="submit" value="C'est quoi la règle ?"> 
+                        </div>
+
+                        <div id="regles">
+                            <p class="rules" id=""> <!-- règles ici --></p>
+                        </div>
+                    </div>
+                </div>
+        </div>  
+
+        <script src="main.js"></script>
+        
     </body>
 
 </html>
