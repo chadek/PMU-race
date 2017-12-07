@@ -23,7 +23,7 @@ body {
 #horse {
 	position: absolute;
 	width: 40em;
-	left: 37em;
+	left: 60em;
 	top: 7em;
 	z-index: -1;
 }
