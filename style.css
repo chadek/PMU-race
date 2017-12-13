@@ -20,6 +20,10 @@ body {
 	font-family: inherit;
 }
 
+.red {
+	color :#009999;
+}
+
 #horse-img {
 	position: absolute;
 	width: 40em;
