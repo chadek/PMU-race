@@ -33,7 +33,6 @@
                     <!-- dropdown nombre de joueurs -->
                     <h3 class ="field-title">Nombre de joueurs</h3>                        
                     <select id="players-number">
-                        <option selected disabled>Nombre de joueurs</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -44,99 +43,50 @@
                         <option value="8">8</option>
                     </select>
 
-<<<<<<< HEAD
-                <div id="players-board" class="grid-1">
-                    <!-- J'essaie de faire une grid pour disposer nos éléments proprement dans la page -> je pense que c'est plus simple de faire ça avec des flexbox-->
-                                    
-                <!-- liste des joueurs -->
-                <div id="players-holder">
-                    <!-- joueurs activés par défaut, classes pour désactiver les joueurs : hidden -->
-
-                    <div id="joueur1"> <!-- quand tout sera bien défini : recopier cette div le nombre de joueurs -->
-                        
-                        <!-- /!\ id uniques ! comme on va copier cette div 8 fois il ne faut pas utiliser de id dedans -->
-                        
-                        <div class="col-player-id">
-                            <p class="player-id">Joueur 1</p>
-                        </div>
-
-                        <div class="col-player-input">
-                            <h3 class ="field-title">Nom</h3><!-- todo : add desktop-hidden class for players 2-8 -->
-                            <input class="player-input" name="player-x" type="text"/>
-                        </div>
-                        
-                        <div class="col-player-horse">
-                            <h3 class ="field-title">Poulain</h3><!-- todo : add desktop-hidden class for players 2-8 -->
-                            <select class="player-horse">
-                                <option value="clover">♣</option>
-                                <option value="heart" color = red>♥</option>
-                                <option value="diamond" color = red>♦</option>
-                                <option value="spade">♠</option>
-                            </select>
-                        </div>
-
-                        <div class="col-player-bet">
-                            <h3 class ="field-title">Mise</h3> <!-- todo : add desktop-hidden class for players 2-8 -->
-                            <select class="player-bet">
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
-                                <option value="8">8</option>
-                                <option value="1000">1000</option>
-                            </select>
-=======
-                    <div id="players-board" class="grid-1">
-                        <!-- J'essaie de faire une grid pour disposer nos éléments proprement dans la page -> je pense que c'est plus simple de faire ça avec des flexbox-->
-                                        
                     <!-- liste des joueurs -->
-                        <div id="players-holder">
-                            <!-- joueurs activés par défaut, classes pour désactiver les joueurs : hidden -->
+                    <div id="players-holder">
+                        <!-- joueurs activés par défaut, classes pour désactiver les joueurs : hidden -->
 
-                            <div id="joueur1"> <!-- quand tout sera bien défini : recopier cette div le nombre de joueurs -->
-                                
-                                <!-- /!\ id uniques ! comme on va copier cette div 8 fois il ne faut pas utiliser de id dedans -->
-                                
-                                <div class="col-player-id">
-                                    <p class="player-id">Joueur 1</p>
-                                </div>
-
-                                <div class="col-player-input">
-                                    <h3 class ="field-title">Nom</h3><!-- todo : add desktop-hidden class for players 2-8 -->
-                                    <input class="player-input" name="player-x" type="text"/>
-                                </div>
-                                
-                                <div class="col-player-horse">
-                                    <h3 class ="field-title">Poulain</h3><!-- todo : add desktop-hidden class for players 2-8 -->
-                                    <select class="player-horse">
-                                        <option value="clover">♣</option>
-                                        <option value="heart">♥</option>
-                                        <option value="diamond">♦</option>
-                                        <option value="spade">♠</option>
-                                    </select>
-                                </div>
-
-                                <div class="col-player-bet">
-                                    <h3 class ="field-title">Mise</h3> <!-- todo : add desktop-hidden class for players 2-8 -->
-                                    <select class="player-bet">
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                        <option value="5">5</option>
-                                        <option value="6">6</option>
-                                        <option value="7">7</option>
-                                        <option value="8">8</option>
-                                        <option value="1000">1000</option>
-                                    </select>
-                                </div>
+                        <div id="joueur1"> <!-- quand tout sera bien défini : recopier cette div le nombre de joueurs -->
+                            
+                            <!-- /!\ id uniques ! comme on va copier cette div 8 fois il ne faut pas utiliser de id dedans -->
+                            
+                            <div class="col-player-id">
+                                <p class="player-id">Joueur 1</p>
                             </div>
->>>>>>> 16e024ddd027684d155313a586bae71558cce4cd
+
+                            <div class="col-player-input">
+                                <h3 class ="field-title">Nom</h3><!-- todo : add desktop-hidden class for players 2-8 -->
+                                <input class="player-input" name="player-x" type="text"/>
+                            </div>
+                            
+                            <div class="col-player-horse">
+                                <h3 class ="field-title">Poulain</h3><!-- todo : add desktop-hidden class for players 2-8 -->
+                                <select class="player-horse">
+                                    <option value="clover">♣</option>
+                                    <option value="heart">♥</option>
+                                    <option value="diamond">♦</option>
+                                    <option value="spade">♠</option>
+                                </select>
+                            </div>
+
+                            <div class="col-player-bet">
+                                <h3 class ="field-title">Mise</h3> <!-- todo : add desktop-hidden class for players 2-8 -->
+                                <select class="player-bet">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="1000">1000</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
+
 
                
                     <div id="buttons-holder">
