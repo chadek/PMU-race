@@ -31,17 +31,19 @@
             <div id="menu-screen">
                <form id="menu-form" method="post">
                     <!-- dropdown nombre de joueurs -->
-                    <h3 class ="field-title">Nombre de joueurs</h3>                        
-                    <select id="players-number">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                    </select>
+                    <div id="players-number-holder" class="row">
+                        <h3 class ="field-title">Nombre de joueurs</h3>                        
+                        <select id="players-number">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                        </select>
+                    </div>
 
                     <!-- liste des joueurs -->
                     <div id="players-holder">
@@ -106,15 +108,16 @@
                 
                 <div id="deck"> 
                     <div id="deck-hidden">
+                            <img class="face-hidden" alt="a hidden card" src="img/BK.png"/>
                     </div>
                     <div id="drawn-card">
                     </div>
                 </div>
                 
-                <div id="track-holder"> 
+                <div id="tracks-holder"> 
                     <div id="track-side">
                         <div id="track-side-card1" class="card-hidden"> <!-- quand tout sera bien défini : recopier cette div le nombre de tours de la course -->
-                            <img class="face-hidden" alt="a hidden card" src="img/cardXX.png"/>
+                            <img class="face-hidden" alt="a hidden card" src="img/BK.png"/>
                             <img class="face-shown" alt="a card face up" src="img/cardXX.png"/>
                         </div>
                     </div>
@@ -127,7 +130,11 @@
                     </div>
                     <div id="track4">
                     </div>
-                </div>  
+                </div>
+                <div id="commentary">
+                    <h3> Et c'est le coeur qui gagne !</h3>
+                </div>
+                <div>
             </div>
 
             <div id="results-screen" class="hidden">

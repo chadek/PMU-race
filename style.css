@@ -1,7 +1,6 @@
 body {
 	background: #009933;
 	font-family: "Source Sans Pro";
-	overflow: hidden;
 }
 
 #wrapper {
@@ -20,9 +19,6 @@ body {
 	font-family: inherit;
 }
 
-.red {
-	color :#009999;
-}
 
 #horse-img {
 	position: absolute;
