@@ -4,7 +4,10 @@ body {
 }
 
 #wrapper {
-	margin-top: 50px;
+	font-size: 1em;
+	height: 800px;
+	width: 800px;
+	margin: auto;
 }
 
 #site-title {
@@ -19,7 +22,6 @@ body {
 	font-family: inherit;
 }
 
-
 #horse-img {
 	position: absolute;
 	width: 40em;
@@ -28,21 +30,22 @@ body {
 	z-index: -1;
 }
 
-li {
-    list-style-type: none;
-    position: relative;
+.row {
+	display: flex;
+	justify-content: center;
 }
 
+.column {
+	margin-right: 5em;
+}
 
-.grid-2 {
-	display: grid;
-	grid-template-columns: 50% 50%;
+.col-player-id {
+	margin-top: 3em;
+	margin-right: 1em;
 
 }
 
-.grid-1 {
-	display: grid;
-	
+select {
+	background-color: yellow;
 }
-
 
