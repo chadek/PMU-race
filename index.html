@@ -49,7 +49,7 @@
                     <div id="players-holder">
                         <!-- joueurs activés par défaut, classes pour désactiver les joueurs : hidden -->
 
-                        <div id="joueur1" class="row"> <!-- quand tout sera bien défini : recopier cette div le nombre de joueurs -->
+                        <div id="menu-player1" class="row"> <!-- quand tout sera bien défini : recopier cette div le nombre de joueurs -->
                             
                             <!-- /!\ id uniques ! comme on va copier cette div 8 fois il ne faut pas utiliser de id dedans -->
                             
@@ -131,16 +131,27 @@
                     <div id="track4">
                     </div>
                 </div>
-                <div id="commentary">
+                <div id="game-commentary">
                     <h3> Et c'est le coeur qui gagne !</h3>
                 </div>
-                <div>
+                <div id="game-buttons">
+                    <input id="next-turn" class="bold" type="submit" value="prochain tour">
+                    <input id="see-results" class="bold" type="submit" value="voir tous les résultats"> 
+                </div>
             </div>
 
             <div id="results-screen" class="hidden">
-            </div>
-        </div>  
+                <div id="results-board">
+                    <span id="result-player1-name">Player1</span>
+                    <span id="result-player1-score">bois 1000</span>
+                </div>
 
+                <div id="results-buttons">
+                    <input id="back-to-race" class="bold" type="submit" value="retour à la piste">
+                    <input id="new-race" class="bold" type="submit" value="Nouvelle course"> 
+                </div>  
+            </div>
+        </div> <!-- end wrapper -->
 
         <script src="main.js"></script>        
     </body>
