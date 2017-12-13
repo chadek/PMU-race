@@ -1,8 +1,11 @@
-for (var i=0; i<10; i++) {
-	console.log(i);
+
+var playersNumberSelector 	= document.querySelector("#players-number");
+var playersNumber 			= playersNumberSelector.options[playersNumberSelector.selectedIndex].value;
+playersNumberSelector.addEventListener('change', changePlayerNumber);
+
+function changePlayerNumber() {
+	playersNumber = playersNumberSelector.options[playersNumberSelector.selectedIndex].value;
 }
-console.log("loool");
 
-console.log("Toi");
 
-console.log("Olivier s'amuse avec la console");
+console.log(playersNumber);
