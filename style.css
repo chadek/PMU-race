@@ -1,6 +1,7 @@
 body {
 	background: #009933;
 	font-family: "Source Sans Pro";
+	overflow-x: hidden;
 }
 
 #wrapper {
@@ -55,13 +56,16 @@ body {
 .col-player-id {
 	margin-top: 3em;
 	margin-right: 1em;
-
 }
 
-select {
+input, select {
 	background-color: #FFFF99;
 	border-color: black;
-	border-radius: 4px;
+	border-radius: 5px;
+}
+
+input {
+	border-width: 1px;
 }
 
 #input-start {
