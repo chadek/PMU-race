@@ -50,13 +50,11 @@ body {
 }
 
 .ver-margin {
-	margin-top: 0.3em;
-	margin-bottom: 0.3em;	
+	margin: 0.3em 0 0.3em 0;
 }
 
 .hor-margin {
-	margin-left: 2%;
-	margin-right: 2%;
+	margin: 0 2% 0 2%;
 }
 
 .separator-wide {
@@ -161,3 +159,51 @@ body {
 }
 
 
+/* -----------------
+ RESPONSIVE ASPECTS
+-------------------- */
+
+
+@media screen and (max-width: 768px) {
+	/* ------------
+ 	 common layout
+	--------------- */
+	.row {
+		flex-direction: column;
+		align-items: center;
+	}
+	
+	.hor-margin {
+		margin-top: 0.3em;
+		margin-bottom:0.3em;
+	}
+
+	/* ---------
+ 	 Menu stuff
+	------------ */
+
+	.col-player-id {
+	width: 100%;
+	justify-content: center;
+	margin-top: 0.5em;
+	}
+
+	.player-id {
+		text-align: center;
+	}
+	
+	.col-player-name {
+		width: 100%;
+	}
+	.col-player-horse {
+		width: 100%;
+	}
+	.col-player-bet {
+		width: 100%;
+	}
+
+	#menu-buttons {
+		flex-direction: row;
+		flex-wrap: wrap;
+	}
+}
