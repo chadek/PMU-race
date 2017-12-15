@@ -2,13 +2,17 @@ body {
 	background: #009933;
 	font-family: "Source Sans Pro";
 	overflow-x: hidden;
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 768px;
 }
 
 #wrapper {
-	font-size: 1em;
-	height: 800px;
-	width: 800px;
-	margin: auto;
+	margin-left: 20px;
+	margin-right: 20px;
+	margin-bottom: 50px;
+	display: flex;
+	flex-direction: column;
 }
 
 #site-title {
@@ -30,49 +34,130 @@ body {
 	top: 7em;
 	z-index: -1;
 }
-#players-number {
-	height: 2em;
-	width: 2.5em;
-	margin-bottom: auto;
-	margin-top: auto;
-}
 
-#players-number-holder {
-	width: 33em;
-}
+/* ------------
+ common layout
+--------------- */
 
-.field-title {
-	margin-right: 1em;
-}
 .row {
 	display: flex;
-	justify-content: center;
+	flex-direction: row;
 }
 
 .column {
-	margin-right: 5em;
+	display: flex;
+	flex-direction: column;
+}
+
+.ver-margin {
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;	
+}
+
+.hor-margin {
+	margin-left: 2%;
+	margin-right: 2%;
+}
+
+.separator-wide {
+	width: 100%;
+	margin: 1em auto 1em auto;
+	border-bottom: 3px solid rgba(0,0,0,0.5);
+}
+
+.hidden {
+	display: none;
+}
+
+
+/* -------------
+ common buttons
+---------------- */
+
+.interactive-inner {
+	/*background-color: #FFFF99;*/
+	height: 1.5em;
+	border-width: 1.2px;
+	border-radius: 5px;
+	border-color:  rgba(0,0,0,0.5);
+	background-color: #007326;
+	box-shadow: inset 0px 0px 5px rgba(0,0,0,1);
+	color: #FFFF99;
+}
+
+.interactive-inner:hover {
+	background-color: #00802a;
+	box-shadow: inset 0px 0px 5px rgba(0,50,0,1);
+}
+
+.interactive-outer {
+	height: 1.5em;
+	border-width: 1.2px;
+	border-radius: 5px;
+	background-color: white;
+	box-shadow: 1px 1px 8px rgba(0,0,0,0.8);
+}
+
+.interactive-outer:hover {
+	box-shadow: 1.5px 2px 12px rgba(0,0,0,1);
+	background-color: #ddddbb;
+
+}
+.interactive-outer:active {
+	box-shadow: inset 0px 0px 5px rgba(0,50,0,1);
+	background-color: #ddddbb;
+}
+
+
+/* ---------
+ Menu stuff
+------------ */
+
+
+.field-title {
+	margin-bottom : 0.5em;
+	margin-top : 0;
+}
+
+#player-number-holder {
+	justify-content: flex-start;	
+}
+
+.col-player-number {
+	width:70%;
+}
+
+#player-number {
+	width: 3em;
+}
+
+.player-row	 {
+	justify-content: space-between;
 }
 
 .col-player-id {
-	margin-top: 3em;
-	margin-right: 1em;
+	width: 16%;
+	justify-content: flex-end;
+	padding-bottom: 0.3em;
 }
 
-input, select {
-	background-color: #FFFF99;
-	border-color: black;
-	border-radius: 5px;
+.player-id {
+	margin: 0;
+	text-align: right;
 }
 
-input {
-	border-width: 1px;
+.col-player-name {
+	width: 46%;
+}
+.col-player-horse {
+	width: 11%;
+}
+.col-player-bet {
+	width: 11%;
 }
 
-#input-start {
-	margin-right: 6em;
+#menu-buttons {
+	justify-content: center;
 }
 
-#input-rules {
-	margin-right: 1em;
-}
 
