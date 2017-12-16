@@ -30,334 +30,333 @@
             <!-- les 3 écrans sont sur la même page, dans 3 div. On les active 1 par 1 -->
             <div id="menu-screen">
                <form id="menu-form" method="post">
-                    <!-- dropdown nombre de joueurs -->
-                        <div id="player-number-holder" class="row">
+                <!-- dropdown nombre de joueurs -->
+                <div id="player-number-holder" class="row">
 
-                            <div class="col-player-id column hor-margin mobile-hidden">
-                                <!-- séparateur vide -->
-                            </div>
-                            <div class="row-player-number row hor-margin">
-                                <h3 class="field-title">Nombre de joueurs</h3>                        
-                                <select id="player-number" class="interactive-inner hor-margin">
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                    <option value="6">6</option>
-                                    <option value="7">7</option>
-                                    <option value="8">8</option>
-                                </select>
-                            </div>
+                    <div class="col-player-id column hor-margin mobile-hidden">
+                        <!-- séparateur vide -->
+                    </div>
+                    <div class="row-player-number row hor-margin">
+                        <h3 class="field-title">Nombre de joueurs</h3>                        
+                        <select id="player-number" class="interactive-inner hor-margin">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                        </select>
+                    </div>
+                </div>
+
+
+                <!-- liste des joueurs -->
+                <div id="players-holder">
+                    <!-- joueurs activés par défaut, classes pour désactiver les joueurs : hidden -->
+
+                    <div id="menu-player1" class="player-row row ver-margin"> <!-- quand tout sera bien défini : recopier cette div le nombre de joueurs -->
+                        
+                        <!-- /!\ id uniques ! comme on va copier cette div 8 fois il ne faut pas utiliser de id dedans -->
+                        
+                        <div class="col-player-id column hor-margin">
+                            <p class="player-id">Joueur 1</p>
+                        </div>
+
+                        <div class="col-player-name column hor-margin">
+                            <h3 class ="field-title">Nom</h3><!-- todo : add desktop-hidden class for players 2-8 -->
+                            <input class="interactive-inner player-name" type="text"/>
+                        </div>
+                        
+                        <div class="col-player-horse column hor-margin">
+                            <h3 class ="field-title">Poulain</h3><!-- todo : add desktop-hidden class for players 2-8 -->
+                            <select class="interactive-inner player-horse">
+                                <option value="clover">♣</option>
+                                <option value="heart">♥</option>
+                                <option value="diamond">♦</option>
+                                <option value="spade">♠</option>
+                            </select>
+                        </div>
+
+                        <div class="col-player-bet column hor-margin">
+                            <h3 class ="field-title">Mise</h3> <!-- todo : add desktop-hidden class for players 2-8 -->
+                            <select class="interactive-inner player-bet">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="1000">1000</option>
+                            </select>
                         </div>
                     </div>
-
-                    <!-- liste des joueurs -->
-                    <div id="players-holder">
-                        <!-- joueurs activés par défaut, classes pour désactiver les joueurs : hidden -->
-
-                        <div id="menu-player1" class="player-row row ver-margin"> <!-- quand tout sera bien défini : recopier cette div le nombre de joueurs -->
-                            
-                            <!-- /!\ id uniques ! comme on va copier cette div 8 fois il ne faut pas utiliser de id dedans -->
-                            
-                            <div class="col-player-id column hor-margin">
-                                <p class="player-id">Joueur 1</p>
-                            </div>
-
-                            <div class="col-player-name column hor-margin">
-                                <h3 class ="field-title">Nom</h3><!-- todo : add desktop-hidden class for players 2-8 -->
-                                <input class="interactive-inner player-name" name="player-x" type="text"/>
-                            </div>
-                            
-                            <div class="col-player-horse column hor-margin">
-                                <h3 class ="field-title">Poulain</h3><!-- todo : add desktop-hidden class for players 2-8 -->
-                                <select class="interactive-inner player-horse">
-                                    <option value="clover">♣</option>
-                                    <option value="heart">♥</option>
-                                    <option value="diamond">♦</option>
-                                    <option value="spade">♠</option>
-                                </select>
-                            </div>
-
-                            <div class="col-player-bet column hor-margin">
-                                <h3 class ="field-title">Mise</h3> <!-- todo : add desktop-hidden class for players 2-8 -->
-                                <select class="interactive-inner player-bet">
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                    <option value="6">6</option>
-                                    <option value="7">7</option>
-                                    <option value="8">8</option>
-                                    <option value="1000">1000</option>
-                                </select>
-                            </div>
+                    <div id="menu-player2" class="player-row row ver-margin hidden">
+                        
+                        <div class="col-player-id column hor-margin">
+                            <p class="player-id">Joueur 2</p>
                         </div>
-                        <div id="menu-player2" class="player-row row ver-margin hidden">
-                            
-                            <div class="col-player-id column hor-margin">
-                                <p class="player-id">Joueur 2</p>
-                            </div>
 
-                            <div class="col-player-name column hor-margin">
-                                <h3 class ="field-title desktop-hidden">Nom</h3>
-                                <input class="interactive-inner player-name" name="player-x" type="text"/>
-                            </div>
-                            
-                            <div class="col-player-horse column hor-margin">
-                                <h3 class ="field-title desktop-hidden">Poulain</h3>
-                                <select class="interactive-inner player-horse">
-                                    <option value="clover">♣</option>
-                                    <option value="heart">♥</option>
-                                    <option value="diamond">♦</option>
-                                    <option value="spade">♠</option>
-                                </select>
-                            </div>
-
-                            <div class="col-player-bet column hor-margin">
-                                <h3 class ="field-title desktop-hidden">Mise</h3>
-                                <select class="interactive-inner player-bet">
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                    <option value="6">6</option>
-                                    <option value="7">7</option>
-                                    <option value="8">8</option>
-                                    <option value="1000">1000</option>
-                                </select>
-                            </div>
+                        <div class="col-player-name column hor-margin">
+                            <h3 class ="field-title desktop-hidden">Nom</h3>
+                            <input class="interactive-inner player-name" type="text"/>
                         </div>
-                        <div id="menu-player3" class="player-row row ver-margin hidden">
-                            
-                            <div class="col-player-id column hor-margin">
-                                <p class="player-id">Joueur 3</p>
-                            </div>
-
-                            <div class="col-player-name column hor-margin">
-                                <h3 class ="field-title desktop-hidden">Nom</h3>
-                                <input class="interactive-inner player-name" name="player-x" type="text"/>
-                            </div>
-                            
-                            <div class="col-player-horse column hor-margin">
-                                <h3 class ="field-title desktop-hidden">Poulain</h3>
-                                <select class="interactive-inner player-horse">
-                                    <option value="clover">♣</option>
-                                    <option value="heart">♥</option>
-                                    <option value="diamond">♦</option>
-                                    <option value="spade">♠</option>
-                                </select>
-                            </div>
-
-                            <div class="col-player-bet column hor-margin">
-                                <h3 class ="field-title desktop-hidden">Mise</h3>
-                                <select class="interactive-inner player-bet">
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                    <option value="6">6</option>
-                                    <option value="7">7</option>
-                                    <option value="8">8</option>
-                                    <option value="1000">1000</option>
-                                </select>
-                            </div>
+                        
+                        <div class="col-player-horse column hor-margin">
+                            <h3 class ="field-title desktop-hidden">Poulain</h3>
+                            <select class="interactive-inner player-horse">
+                                <option value="clover">♣</option>
+                                <option value="heart">♥</option>
+                                <option value="diamond">♦</option>
+                                <option value="spade">♠</option>
+                            </select>
                         </div>
-                        <div id="menu-player4" class="player-row row ver-margin hidden">
-                            
-                            <div class="col-player-id column hor-margin">
-                                <p class="player-id">Joueur 4</p>
-                            </div>
 
-                            <div class="col-player-name column hor-margin">
-                                <h3 class ="field-title desktop-hidden">Nom</h3>
-                                <input class="interactive-inner player-name" name="player-x" type="text"/>
-                            </div>
-                            
-                            <div class="col-player-horse column hor-margin">
-                                <h3 class ="field-title desktop-hidden">Poulain</h3>
-                                <select class="interactive-inner player-horse">
-                                    <option value="clover">♣</option>
-                                    <option value="heart">♥</option>
-                                    <option value="diamond">♦</option>
-                                    <option value="spade">♠</option>
-                                </select>
-                            </div>
-
-                            <div class="col-player-bet column hor-margin">
-                                <h3 class ="field-title desktop-hidden">Mise</h3>
-                                <select class="interactive-inner player-bet">
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                    <option value="6">6</option>
-                                    <option value="7">7</option>
-                                    <option value="8">8</option>
-                                    <option value="1000">1000</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div id="menu-player5" class="player-row row ver-margin hidden">
-                            
-                            <div class="col-player-id column hor-margin">
-                                <p class="player-id">Joueur 5</p>
-                            </div>
-
-                            <div class="col-player-name column hor-margin">
-                                <h3 class ="field-title desktop-hidden">Nom</h3>
-                                <input class="interactive-inner player-name" name="player-x" type="text"/>
-                            </div>
-                            
-                            <div class="col-player-horse column hor-margin">
-                                <h3 class ="field-title desktop-hidden">Poulain</h3>
-                                <select class="interactive-inner player-horse">
-                                    <option value="clover">♣</option>
-                                    <option value="heart">♥</option>
-                                    <option value="diamond">♦</option>
-                                    <option value="spade">♠</option>
-                                </select>
-                            </div>
-
-                            <div class="col-player-bet column hor-margin">
-                                <h3 class ="field-title desktop-hidden">Mise</h3>
-                                <select class="interactive-inner player-bet">
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                    <option value="6">6</option>
-                                    <option value="7">7</option>
-                                    <option value="8">8</option>
-                                    <option value="1000">1000</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div id="menu-player6" class="player-row row ver-margin hidden">
-                            
-                            <div class="col-player-id column hor-margin">
-                                <p class="player-id">Joueur 6</p>
-                            </div>
-
-                            <div class="col-player-name column hor-margin">
-                                <h3 class ="field-title desktop-hidden">Nom</h3>
-                                <input class="interactive-inner player-name" name="player-x" type="text"/>
-                            </div>
-                            
-                            <div class="col-player-horse column hor-margin">
-                                <h3 class ="field-title desktop-hidden">Poulain</h3>
-                                <select class="interactive-inner player-horse">
-                                    <option value="clover">♣</option>
-                                    <option value="heart">♥</option>
-                                    <option value="diamond">♦</option>
-                                    <option value="spade">♠</option>
-                                </select>
-                            </div>
-
-                            <div class="col-player-bet column hor-margin">
-                                <h3 class ="field-title desktop-hidden">Mise</h3>
-                                <select class="interactive-inner player-bet">
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                    <option value="6">6</option>
-                                    <option value="7">7</option>
-                                    <option value="8">8</option>
-                                    <option value="1000">1000</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div id="menu-player7" class="player-row row ver-margin hidden">
-                            
-                            <div class="col-player-id column hor-margin">
-                                <p class="player-id">Joueur 7</p>
-                            </div>
-
-                            <div class="col-player-name column hor-margin">
-                                <h3 class ="field-title desktop-hidden">Nom</h3>
-                                <input class="interactive-inner player-name" name="player-x" type="text"/>
-                            </div>
-                            
-                            <div class="col-player-horse column hor-margin">
-                                <h3 class ="field-title desktop-hidden">Poulain</h3>
-                                <select class="interactive-inner player-horse">
-                                    <option value="clover">♣</option>
-                                    <option value="heart">♥</option>
-                                    <option value="diamond">♦</option>
-                                    <option value="spade">♠</option>
-                                </select>
-                            </div>
-
-                            <div class="col-player-bet column hor-margin">
-                                <h3 class ="field-title desktop-hidden">Mise</h3>
-                                <select class="interactive-inner player-bet">
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                    <option value="6">6</option>
-                                    <option value="7">7</option>
-                                    <option value="8">8</option>
-                                    <option value="1000">1000</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div id="menu-player8" class="player-row row ver-margin hidden">
-                            
-                            <div class="col-player-id column hor-margin">
-                                <p class="player-id">Joueur 8</p>
-                            </div>
-
-                            <div class="col-player-name column hor-margin">
-                                <h3 class ="field-title desktop-hidden">Nom</h3>
-                                <input class="interactive-inner player-name" name="player-x" type="text"/>
-                            </div>
-                            
-                            <div class="col-player-horse column hor-margin">
-                                <h3 class ="field-title desktop-hidden">Poulain</h3>
-                                <select class="interactive-inner player-horse">
-                                    <option value="clover">♣</option>
-                                    <option value="heart">♥</option>
-                                    <option value="diamond">♦</option>
-                                    <option value="spade">♠</option>
-                                </select>
-                            </div>
-
-                            <div class="col-player-bet column hor-margin">
-                                <h3 class ="field-title desktop-hidden">Mise</h3>
-                                <select class="interactive-inner player-bet">
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                    <option value="6">6</option>
-                                    <option value="7">7</option>
-                                    <option value="8">8</option>
-                                    <option value="1000">1000</option>
-                                </select>
-                            </div>
+                        <div class="col-player-bet column hor-margin">
+                            <h3 class ="field-title desktop-hidden">Mise</h3>
+                            <select class="interactive-inner player-bet">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="1000">1000</option>
+                            </select>
                         </div>
                     </div>
+                    <div id="menu-player3" class="player-row row ver-margin hidden">
+                        
+                        <div class="col-player-id column hor-margin">
+                            <p class="player-id">Joueur 3</p>
+                        </div>
 
-                    <div class="separator-wide"></div>
+                        <div class="col-player-name column hor-margin">
+                            <h3 class ="field-title desktop-hidden">Nom</h3>
+                            <input class="interactive-inner player-name" type="text"/>
+                        </div>
+                        
+                        <div class="col-player-horse column hor-margin">
+                            <h3 class ="field-title desktop-hidden">Poulain</h3>
+                            <select class="interactive-inner player-horse">
+                                <option value="clover">♣</option>
+                                <option value="heart">♥</option>
+                                <option value="diamond">♦</option>
+                                <option value="spade">♠</option>
+                            </select>
+                        </div>
 
-               
+                        <div class="col-player-bet column hor-margin">
+                            <h3 class ="field-title desktop-hidden">Mise</h3>
+                            <select class="interactive-inner player-bet">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="1000">1000</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="menu-player4" class="player-row row ver-margin hidden">
+                        
+                        <div class="col-player-id column hor-margin">
+                            <p class="player-id">Joueur 4</p>
+                        </div>
+
+                        <div class="col-player-name column hor-margin">
+                            <h3 class ="field-title desktop-hidden">Nom</h3>
+                            <input class="interactive-inner player-name" type="text"/>
+                        </div>
+                        
+                        <div class="col-player-horse column hor-margin">
+                            <h3 class ="field-title desktop-hidden">Poulain</h3>
+                            <select class="interactive-inner player-horse">
+                                <option value="clover">♣</option>
+                                <option value="heart">♥</option>
+                                <option value="diamond">♦</option>
+                                <option value="spade">♠</option>
+                            </select>
+                        </div>
+
+                        <div class="col-player-bet column hor-margin">
+                            <h3 class ="field-title desktop-hidden">Mise</h3>
+                            <select class="interactive-inner player-bet">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="1000">1000</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="menu-player5" class="player-row row ver-margin hidden">
+                        
+                        <div class="col-player-id column hor-margin">
+                            <p class="player-id">Joueur 5</p>
+                        </div>
+
+                        <div class="col-player-name column hor-margin">
+                            <h3 class ="field-title desktop-hidden">Nom</h3>
+                            <input class="interactive-inner player-name" type="text"/>
+                        </div>
+                        
+                        <div class="col-player-horse column hor-margin">
+                            <h3 class ="field-title desktop-hidden">Poulain</h3>
+                            <select class="interactive-inner player-horse">
+                                <option value="clover">♣</option>
+                                <option value="heart">♥</option>
+                                <option value="diamond">♦</option>
+                                <option value="spade">♠</option>
+                            </select>
+                        </div>
+
+                        <div class="col-player-bet column hor-margin">
+                            <h3 class ="field-title desktop-hidden">Mise</h3>
+                            <select class="interactive-inner player-bet">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="1000">1000</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="menu-player6" class="player-row row ver-margin hidden">
+                        
+                        <div class="col-player-id column hor-margin">
+                            <p class="player-id">Joueur 6</p>
+                        </div>
+
+                        <div class="col-player-name column hor-margin">
+                            <h3 class ="field-title desktop-hidden">Nom</h3>
+                            <input class="interactive-inner player-name" type="text"/>
+                        </div>
+                        
+                        <div class="col-player-horse column hor-margin">
+                            <h3 class ="field-title desktop-hidden">Poulain</h3>
+                            <select class="interactive-inner player-horse">
+                                <option value="clover">♣</option>
+                                <option value="heart">♥</option>
+                                <option value="diamond">♦</option>
+                                <option value="spade">♠</option>
+                            </select>
+                        </div>
+
+                        <div class="col-player-bet column hor-margin">
+                            <h3 class ="field-title desktop-hidden">Mise</h3>
+                            <select class="interactive-inner player-bet">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="1000">1000</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="menu-player7" class="player-row row ver-margin hidden">
+                        
+                        <div class="col-player-id column hor-margin">
+                            <p class="player-id">Joueur 7</p>
+                        </div>
+
+                        <div class="col-player-name column hor-margin">
+                            <h3 class ="field-title desktop-hidden">Nom</h3>
+                            <input class="interactive-inner player-name" type="text"/>
+                        </div>
+                        
+                        <div class="col-player-horse column hor-margin">
+                            <h3 class ="field-title desktop-hidden">Poulain</h3>
+                            <select class="interactive-inner player-horse">
+                                <option value="clover">♣</option>
+                                <option value="heart">♥</option>
+                                <option value="diamond">♦</option>
+                                <option value="spade">♠</option>
+                            </select>
+                        </div>
+
+                        <div class="col-player-bet column hor-margin">
+                            <h3 class ="field-title desktop-hidden">Mise</h3>
+                            <select class="interactive-inner player-bet">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="1000">1000</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="menu-player8" class="player-row row ver-margin hidden">
+                        
+                        <div class="col-player-id column hor-margin">
+                            <p class="player-id">Joueur 8</p>
+                        </div>
+
+                        <div class="col-player-name column hor-margin">
+                            <h3 class ="field-title desktop-hidden">Nom</h3>
+                            <input class="interactive-inner player-name" type="text"/>
+                        </div>
+                        
+                        <div class="col-player-horse column hor-margin">
+                            <h3 class ="field-title desktop-hidden">Poulain</h3>
+                            <select class="interactive-inner player-horse">
+                                <option value="clover">♣</option>
+                                <option value="heart">♥</option>
+                                <option value="diamond">♦</option>
+                                <option value="spade">♠</option>
+                            </select>
+                        </div>
+
+                        <div class="col-player-bet column hor-margin">
+                            <h3 class ="field-title desktop-hidden">Mise</h3>
+                            <select class="interactive-inner player-bet">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="1000">1000</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="separator-wide"></div>
+
                     <div id="menu-buttons" class="row ver-margin">
-                        <input id="input-start" class="interactive-outer hor-margin" type="submit" value="Démarrer la course !">
-                        <input id="input-rules" class="interactive-outer hor-margin" type="submit" value="C'est quoi les règles ?"> 
+                        <input id="button-start" class="interactive-outer hor-margin" type="submit" value="Démarrer la course !">
+                        <input id="button-rules" class="interactive-outer hor-margin" type="submit" value="C'est quoi les règles ?"> 
                     </div>
                 </form>
 
-                <div id="rules-holder">
+                <div id="rules">
                     <h2 class="rule-title"> Les règles </h2>
                     <h3 class="rule-subtitle">Règle N°1</h3>
                     <p class="rule">Ne pas parler du PMU-RACE</p>
