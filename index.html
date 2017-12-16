@@ -28,7 +28,7 @@
             <h2 id="site-description">Parions race !</h2>
 
             <!-- les 3 écrans sont sur la même page, dans 3 div. On les active 1 par 1 -->
-            <div id="menu-screen">
+            <div id="menu-screen" class="hidden">
                <form id="menu-form" method="post">
                 <!-- dropdown nombre de joueurs -->
                 <div id="player-number-holder" class="row">
@@ -363,25 +363,42 @@
                 </div>
             </div>
 
-            <div id ="game-screen" class="hidden">
+            <div id ="game-screen" class="">
                 
-                <div id="deck"> 
-                    <div id="deck-hidden">
-                            <img class="face-hidden" alt="a hidden card" src="img/BK.png"/>
+                <div id="deck" class="row-fixed ver-margin"> 
+                    <div id="deck-face-down" class="deck-card-holder hor-margin">
+                        <img class="face-down deck-card" alt="a hidden card" src="img/BK.png"/>
                     </div>
-                    <div id="drawn-card">
+                    <div id="deck-face-up" class="deck-card-holder hor-margin">
+                        <img class="face-up deck-card" alt="a hidden card" src="img/BK.png"/>
                     </div>
                 </div>
                 
                 <div id="tracks-holder"> 
-                    <div id="track-side">
-                        <div id="track-side-card1" class="card-hidden"> <!-- quand tout sera bien défini : recopier cette div le nombre de tours de la course -->
-                            <img class="face-hidden" alt="a hidden card" src="img/BK.png"/>
-                            <img class="face-shown" alt="a card face up" src="img/cardXX.png"/>
-                        </div>
+                    <div id="track-side" class="row-fixed"><!-- quand tout sera bien défini : recopier cette div le nombre de tours de la course -->
+                            <div class="card-holder">
+                                <img class="face-down card" alt="a hidden card" src="img/BK.png"/>
+                            </div>
+                            <div class="card-holder">
+                                <img class="face-down card" alt="a hidden card" src="img/BK.png"/>
+                            </div>
+                            <div class="card-holder">
+                                <img class="face-down card" alt="a hidden card" src="img/BK.png"/>
+                            </div>
+                            <div class="card-holder">
+                                <img class="face-down card" alt="a hidden card" src="img/BK.png"/>
+                            </div>
+                            <div class="card-holder">
+                                <img class="face-down card" alt="a hidden card" src="img/BK.png"/>
+                            </div>
+                            <div class="card-holder">
+                                <img class="face-down card" alt="a hidden card" src="img/BK.png"/>
+                            </div>
+                            <div class="card-holder">
+                                <img class="face-down card" alt="a hidden card" src="img/BK.png"/>
+                            </div>
                     </div>
                     <div id="track1">
-                            <img id="horse1" class="horse" alt="horse N°1" src="img/cardXX.png"/>
                     </div>
                     <div id="track2">
                     </div>

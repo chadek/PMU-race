@@ -6,6 +6,16 @@ règles de syntaxe :
 */
 
 
+/* ---------------
+ common variables
+------------------ */
+
+var activeScreen = "menu";
+
+/*dev line : to remove later !!!*/
+activeScreen = "game";
+
+
 /* -------------------------
  menu variables & listeners
 ---------------------------- */
@@ -30,6 +40,36 @@ var playersData = [];
 ---------------------------------- */
 
 var APILoaded = false;
+
+/*Insert cards in deck variables*/
+var decksSelector = document.getElementsByClassName("deck-card-holder");
+var deckStyle = window.getComputedStyle(decksSelector[0]);
+var deckWidth = deckStyle.getPropertyValue('width');
+
+var deckCardsSelector = document.getElementsByClassName('deck-card');
+var deckCardStyle = window.getComputedStyle(deckCardsSelector[0]);
+var deckCardWidth = deckCardStyle.getPropertyValue('width');
+
+/*Insert cards in holders variables*/
+var cardHoldersSelector = document.getElementsByClassName("card-holder");
+var cardHolderStyle = window.getComputedStyle(cardHoldersSelector[0]);
+var cardHolderWidth = cardHolderStyle.getPropertyValue('width');
+
+var cardsSelector = document.getElementsByClassName('card');
+var cardStyle = window.getComputedStyle(cardsSelector[0]);
+var cardWidth = cardStyle.getPropertyValue('width');
+
+
+/* ---------------
+ common functions
+------------------ */
+
+window.onresize = function(event) {
+	if (activeScreen == "game") { 
+		insertCardsinDesk();   
+		insertCardsinHolders();
+	}
+};
 
 /* -------------
  menu functions
@@ -122,10 +162,11 @@ function getPlayersData () {
 
 function initGameScreen () {
 	showGameScreen();
+	activeScreen = "game";
+
 	if (APILoaded) {
 		resetAPI();
-	}
-	else {
+	} else {
 		setupAPI();
 		APILoaded = true;
 	}
@@ -142,3 +183,42 @@ function setupAPI() {
 function reserAPI() {
 
 }
+
+
+function insertCardsinDesk() {
+	deckStyle = window.getComputedStyle(decksSelector[0]);
+	deckWidth = deckStyle.getPropertyValue('width');
+
+	for(i=0; i<deckCardsSelector.length; i++) {
+		deckCardsSelector[i].style.height = deckWidth;
+	}
+
+	deckCardStyle = window.getComputedStyle(deckCardsSelector[0]);
+	 deckCardWidth = deckCardStyle.getPropertyValue('width');
+
+	for(i=0; i<decksSelector.length; i++) {
+		decksSelector[i].style.height = deckCardWidth;
+	}
+
+}
+insertCardsinDesk();
+
+
+function insertCardsinHolders() {
+	cardHolderStyle = window.getComputedStyle(cardHoldersSelector[0]);
+	cardHolderWidth = cardHolderStyle.getPropertyValue('width');
+
+	for(i=0; i<cardsSelector.length; i++) {
+		cardsSelector[i].style.height = cardHolderWidth;
+	}
+
+	cardStyle = window.getComputedStyle(cardsSelector[0]);
+	 cardWidth = cardStyle.getPropertyValue('width');
+
+	for(i=0; i<cardHoldersSelector.length; i++) {
+		cardHoldersSelector[i].style.height = cardWidth;
+	}
+
+}
+insertCardsinHolders();
+

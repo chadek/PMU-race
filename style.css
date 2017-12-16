@@ -47,6 +47,12 @@ body {
 	flex-direction: row;
 }
 
+.row-fixed {
+	/*will not turn into a column in mobile*/
+	display: flex;
+	flex-direction: row;
+}
+
 .column {
 	display: flex;
 	flex-direction: column;
@@ -159,7 +165,7 @@ body {
 
 @keyframes dropUp {
 	0% { 
-		transform: scale(1.1) translateY(30px) rotateX(-90deg);
+		transform: scale(1.1) translateY(30px) rotateX(-90deg) skewX(-30deg);
 		opacity: 0;
 	}
 	100% {
@@ -180,7 +186,7 @@ body {
 		opacity: 1;
 	}
 	100% { 
-		transform: scale(1.1) translateY(30px) rotateX(70deg);
+		transform: scale(1.1) translateY(30px) rotateX(70deg) skewX(20deg);
 		opacity: 0;
 	}
 }
@@ -209,6 +215,38 @@ body {
 
 #menu-buttons {
 	justify-content: center;
+}
+
+
+/* ---------
+ Game stuff
+------------ */
+
+#deck {
+	justify-content: center;
+}
+
+
+.deck-card-holder {
+	width: 30%;
+}
+
+.deck-card {
+	transform-origin: 0% 0%;
+	transform: rotate(90deg) translateY(-100%);
+}
+
+#track-side {
+	justify-content: space-between;
+}
+
+.card-holder {
+	width: 14.29%;
+}
+
+.card {
+	transform-origin: 0% 0%;
+	transform: rotate(90deg) translateY(-100%);
 }
 
 /* ----------------------
