@@ -71,13 +71,22 @@ buttonNextTurn.addEventListener('click', nextTurn);
 var buttonSeeResults = document.querySelector("#see-results");
 buttonSeeResults.addEventListener('click', seeResults);
 
-/*deck cards to animate*/
+/*deck variables*/
+var deckDiv = document.querySelector("#deck-face-down");
+deckDiv.addEventListener('click', nextTurn);
 var deckCardPick = document.querySelector("#deck-face-down .top-card");
 var deckCardDropTop = document.querySelector("#deck-face-up .top-card");
 var deckCardDropBottom = document.querySelector("#deck-face-up .bottom-card");
+var deckCardId = 0; //Id of the next card to draw from the API deck
 
-/*horses variables*/
+/*track side variables*/
+var trackSideCardsBottom = document.querySelectorAll('.track-card .bottom-card');
+var trackSideCardsTop = document.querySelectorAll('.track-card .top-card');
+var sideCardToTurn = 0; //Id of the next side card to turn
 
+/*Aces variables*/
+var aceHoldersSelector = document.querySelectorAll('.track .card-holder');
+var acesSelector = document.querySelectorAll('.track .card');
 
 /*API variables*/
 var deckId = "";
@@ -189,47 +198,6 @@ function getPlayersData () {
 }
 
 
-/* ------------
- API functions
---------------- */
-
-request.onreadystatechange = function() {
-  if (request.readyState == 4 && request.status == 200) {
-  	
-    requestAnswered();
-  }
-};
-
-function requestAnswered(){
-	requestData = JSON.parse(request.responseText);
-	if (debug) {
-		console.log("APIState : " + APIState);
-		console.log("requestData : ");
-		console.log(requestData);
-	}
-	switch (APIState) {
-	  	case "init":
-			deckId = requestData.deck_id;
-			drawCards(52);
-			break;
-		case "gameDrawn":
-			deckCards = requestData.cards;
-			makeAcesPile();
-			if (debug) {
-				console.log("aces :");
-				console.log(aces);
-			}
-			makeSideTrackPile();
-			if (debug) {
-				console.log("sideTrackDeck :");
-				console.log(sideTrackDeck);
-			}
-			break;
-		default:
-			break;
-	}
-}
-
 
 /* -------------
  game functions
@@ -256,6 +224,59 @@ function setupAPI() {
 	APIState = "init";
 	request.open('GET', "https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1", true);
 	request.send();
+}
+
+request.onreadystatechange = function() {
+	/*API request came back*/
+	if (request.readyState == 4 && request.status == 200) {
+    	requestAnswered();
+  	}
+};
+
+function requestAnswered(){
+	/*do stuff with the request*/
+	requestData = JSON.parse(request.responseText);
+	if (debug) {
+		console.log("APIState : " + APIState);
+		console.log("requestData : ");
+		console.log(requestData);
+	}
+	switch (APIState) {
+	  	case "init":
+			deckId = requestData.deck_id;
+			drawCards(52);
+			break;
+		case "gameDrawn":
+			deckCards = requestData.cards;
+			makeAcesPile();
+			if (debug) {
+				console.log("aces :");
+				console.log(aces);
+			}
+			makeSideTrackPile();
+			if (debug) {
+				console.log("sideTrackDeck :");
+				console.log(sideTrackDeck);
+			}
+			loadSideTrackCards();
+			loadAces();
+			break;
+		default:
+			break;
+	}
+}
+
+function loadAces() {
+	for (i=0; i<4; i++) {
+		acesSelector[i].src = aces[i].image;
+		acesSelector[i].classList.remove("hidden");		
+	}
+}
+
+function loadSideTrackCards() {
+	for (i=0; i<5; i++) {
+		trackSideCardsTop[i].src = sideTrackDeck[i].images.png;
+	}
 }
 
 function drawCards(x) {
@@ -330,9 +351,17 @@ function nextTurn () {
 	if (nextTurnAvailable) {
 		nextTurnAvailable = false;
 		if (debug) {console.log("nextTurn");}
-		takeCardFromDeck();
 		loadDropCard();
-		dropCardOnDeck();
+		
+		updateDeck();
+
+		setTimeout(function () {
+			updateAces();
+		},800);
+		
+		setTimeout(function () {
+			updateTrackSide();
+		},1600);
 		/*
 		- move forward the card with the color of the deck card face up that's been loaded
 		- check if someone won th race
@@ -344,7 +373,49 @@ function nextTurn () {
 	}
 }
 
-function takeCardFromDeck () {
+function updateAces() {
+	//checks wich Ace needs to move fwd & moves it
+	for (i=0; i<4; i++) {
+		if (deckCards[deckCardId-1].suit == aces[i].suit) {
+			console.log("aces.suit");
+			console.log(aces[i].suit);
+			moveAceFwd(i);
+		}
+	}
+}
+
+function moveAceFwd(i) {
+	//move the ace with id i forward
+	aces[i].position++;
+	var marginLeftTmp = 14.29*aces[i].position;
+	
+	aceHoldersSelector[i].classList.remove("move-card-right");
+
+
+	setTimeout(function () {
+		/*20ms of delay to prevent stupid lag*/
+		aceHoldersSelector[i].style.marginLeft = ""+marginLeftTmp+"%";
+		aceHoldersSelector[i].classList.add("move-card-right");
+	},20);
+}
+
+function loadDropCard() {
+	/*load the next card to draw from the deck API*/
+	deckCardDropTop.src = deckCards[deckCardId].images.png;
+	deckCardId++;
+}
+
+function updateTrackSide() {
+	if (sideCardToTurn<5) {
+		trackSideCardsBottom[sideCardToTurn].classList.add("pick-track-card");
+		setTimeout(function () {
+			trackSideCardsTop[sideCardToTurn].classList.remove("hidden");
+			sideCardToTurn++;
+		},400);
+	}
+}
+
+function updateDeck () {
 	/*animation for taking a card from the deck*/
 	deckCardPick.classList.remove("pick-deck-card");
 
@@ -352,25 +423,22 @@ function takeCardFromDeck () {
 		/*20ms of delay to prevent stupid lag*/
 		deckCardPick.classList.add("pick-deck-card");	
 	},20);
-}
 
-function loadDropCard() {
-	/*load the next card to draw from the deck API*/
-
-}
-
-function dropCardOnDeck () {
-	/*animation to drop the card face up on the deck*/
 	setTimeout(function () {
-		deckCardDropTop.classList.remove("drop-deck-card");
-	},400);
+	/*animation to drop the card face up on the deck*/
+	deckCardDropTop.classList.remove("drop-deck-card");
+	},420);
+
 	setTimeout(function () {
 		/*20ms of delay to prevent stupid lag*/
 		deckCardDropTop.classList.remove("hidden");
 		deckCardDropTop.classList.add("drop-deck-card");
 		copyTopBottomDeckCards();
-	},420);
+	},440);
 }
+
+
+
 
 function copyTopBottomDeckCards () {
 	/*copy the top card face up of the deck to bottom card face up 
