@@ -82,7 +82,6 @@ var deckCardId = 0; //Id of the next card to draw from the API deck
 /*track side variables*/
 var trackSideCardsBottom = document.querySelectorAll('.track-card .bottom-card');
 var trackSideCardsTop = document.querySelectorAll('.track-card .top-card');
-var sideCardToTurn = 0; //Id of the next side card to turn
 
 /*Aces variables*/
 var aceHoldersSelector = document.querySelectorAll('.track .card-holder');
@@ -96,6 +95,21 @@ var aces = []; //API data about the four aces
 var sideTrackDeck = []; //API data about the cards on the side of the track
 var request = new XMLHttpRequest();
 var requestData;
+
+var raceInfos = { 
+	/*infos sur la course pour 
+	-savoir si une carte doit aller en arrière
+	-déterminer la victoire
+	-écrire les commentaires*/
+	firstId:0,
+	lastId:0,
+	nextSideCard:-1
+}
+
+var prevRaceInfos = {};
+Object.assign(prevRaceInfos,raceInfos); //copy 
+//infos du tour précedent, 
+//pour comparer et faire des comentaires
 
 /* ---------------
  common functions
@@ -267,7 +281,7 @@ function requestAnswered(){
 }
 
 function loadAces() {
-	for (i=0; i<4; i++) {
+	for (i=0; i<4; i++) { //causes bugs for unknown reason
 		acesSelector[i].src = aces[i].image;
 		acesSelector[i].classList.remove("hidden");		
 	}
@@ -356,12 +370,24 @@ function nextTurn () {
 		updateDeck();
 
 		setTimeout(function () {
-			updateAces();
+			moveAceFwd();
+			updateRaceInfos();
+
+			setTimeout(function () {
+				console.log("prevRaceInfos");
+				console.log(prevRaceInfos);
+				if (raceInfos.nextSideCard > prevRaceInfos.nextSideCard) {	
+					updateTrackSide();
+
+					setTimeout(function () {
+						moveAceBkw();
+						updateRaceInfos();
+					},800);
+				}
+				Object.assign(prevRaceInfos,raceInfos); //copy
+			},800);
 		},800);
 		
-		setTimeout(function () {
-			updateTrackSide();
-		},1600);
 		/*
 		- move forward the card with the color of the deck card face up that's been loaded
 		- check if someone won th race
@@ -372,32 +398,69 @@ function nextTurn () {
 		coolDownNextTurn();
 	}
 }
-
-function updateAces() {
-	//checks wich Ace needs to move fwd & moves it
+function moveAceBkw() {
+	//checks wich Ace needs to move bkw & moves it
 	for (i=0; i<4; i++) {
-		if (deckCards[deckCardId-1].suit == aces[i].suit) {
-			console.log("aces.suit");
-			console.log(aces[i].suit);
-			moveAceFwd(i);
+		if (sideTrackDeck[raceInfos.nextSideCard].suit == aces[i].suit) {
+			
+			aces[i].position--;
+
+			aceHoldersSelector[i].classList.remove("move-card-right");
+			aceHoldersSelector[i].classList.remove("move-card-left");
+
+			setTimeout(function (i) {
+				/*20ms of delay to prevent stupid lag*/
+				var marginLeftTmp = 14.29*aces[i].position;
+				aceHoldersSelector[i].style.marginLeft = ""+marginLeftTmp+"%";
+				aceHoldersSelector[i].classList.add("move-card-left");
+			},20,i);
 		}
 	}
 }
 
-function moveAceFwd(i) {
-	//move the ace with id i forward
-	aces[i].position++;
-	var marginLeftTmp = 14.29*aces[i].position;
-	
-	aceHoldersSelector[i].classList.remove("move-card-right");
-
-
-	setTimeout(function () {
-		/*20ms of delay to prevent stupid lag*/
-		aceHoldersSelector[i].style.marginLeft = ""+marginLeftTmp+"%";
-		aceHoldersSelector[i].classList.add("move-card-right");
-	},20);
+function updateTrackSide() {
+	if (raceInfos.nextSideCard < 5) {
+		trackSideCardsBottom[raceInfos.nextSideCard].classList.add("pick-track-card");
+		setTimeout(function () {
+			trackSideCardsTop[raceInfos.nextSideCard].classList.remove("hidden");
+		},400);
+	}
 }
+
+function updateRaceInfos () {
+	for (i=0; i<4; i++) {
+		if (aces[raceInfos.lastId].position > aces[i].position) {
+			raceInfos.lastId = i;
+		}
+		if (aces[raceInfos.firstId.position] < aces[i].position) {
+			raceInfos.firstId = i;
+		}
+	}
+	raceInfos.nextSideCard = Math.max(raceInfos.nextSideCard, aces[raceInfos.lastId].position-1);
+	console.log("raceInfos");
+	console.log(raceInfos);
+}
+
+function moveAceFwd() {
+	//checks wich Ace needs to move fwd & moves it
+	for (i=0; i<4; i++) {
+		if (deckCards[deckCardId-1].suit == aces[i].suit) {
+			
+			aces[i].position++;
+
+			aceHoldersSelector[i].classList.remove("move-card-right");
+			aceHoldersSelector[i].classList.remove("move-card-left");
+
+			setTimeout(function (i) {
+				/*20ms of delay to prevent stupid lag*/
+				var marginLeftTmp = 14.29*aces[i].position;
+				aceHoldersSelector[i].style.marginLeft = ""+marginLeftTmp+"%";
+				aceHoldersSelector[i].classList.add("move-card-right");
+			},20,i);
+		}
+	}
+}
+
 
 function loadDropCard() {
 	/*load the next card to draw from the deck API*/
@@ -405,15 +468,7 @@ function loadDropCard() {
 	deckCardId++;
 }
 
-function updateTrackSide() {
-	if (sideCardToTurn<5) {
-		trackSideCardsBottom[sideCardToTurn].classList.add("pick-track-card");
-		setTimeout(function () {
-			trackSideCardsTop[sideCardToTurn].classList.remove("hidden");
-			sideCardToTurn++;
-		},400);
-	}
-}
+
 
 function updateDeck () {
 	/*animation for taking a card from the deck*/
