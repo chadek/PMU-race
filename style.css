@@ -268,11 +268,11 @@ body {
 }
 
 .drop-card {
-    animation-name: dropCard;
+    animation-name: dropDeckCard;
     animation-duration: 0.4s;
 }
 
-@keyframes dropCard {
+@keyframes dropDeckCard {
 	0% { 
 		transform: scale(1.2) 
 				   rotate(90deg) 
@@ -293,12 +293,12 @@ body {
 	}
 }
 
-.pick-card {
-    animation-name: pickCard;
+.pick-deck-card {
+    animation-name: pickDeckCard;
     animation-duration: 0.4s;
 }
 
-@keyframes pickCard {
+@keyframes pickDeckCard {
 	0% { 		
 		transform: rotate(90deg) translateY(-100%);
 		opacity: 1;
@@ -320,7 +320,7 @@ body {
 }
 
 #track-side {
-	justify-content: space-between;
+	justify-content: center;
 }
 
 .card-holder {

@@ -44,7 +44,6 @@ var playersData = [];
 
 var gameScreenSelector = document.querySelector("#game-screen");
 
-var gameLoaded = false; /*has the game been loaded a first time allready ?*/
 var nextTurnAvailable = true; /*cooldown to wait before toggling next turn*/
 
 /*variables to insert cards in deck*/
@@ -77,6 +76,17 @@ var deckCardPick = document.querySelector("#deck-face-down .top-card");
 var deckCardDropTop = document.querySelector("#deck-face-up .top-card");
 var deckCardDropBottom = document.querySelector("#deck-face-up .bottom-card");
 
+/*horses variables*/
+
+
+/*API variables*/
+var deckId = "";
+var APIState; //var to control the state of the API & decide what to do next
+var deckCards = []; //API data about the deck cards
+var aces = []; //API data about the four aces
+var sideTrackDeck = []; //API data about the cards on the side of the track
+var request = new XMLHttpRequest();
+var requestData;
 
 /* ---------------
  common functions
@@ -172,7 +182,52 @@ function getPlayersData () {
 
 		playersData.push(currPlayer);
 	}
-	console.log(playersData);
+	if (debug) {
+		console.log("playersData : ");
+		console.log(playersData);
+	}
+}
+
+
+/* ------------
+ API functions
+--------------- */
+
+request.onreadystatechange = function() {
+  if (request.readyState == 4 && request.status == 200) {
+  	
+    requestAnswered();
+  }
+};
+
+function requestAnswered(){
+	requestData = JSON.parse(request.responseText);
+	if (debug) {
+		console.log("APIState : " + APIState);
+		console.log("requestData : ");
+		console.log(requestData);
+	}
+	switch (APIState) {
+	  	case "init":
+			deckId = requestData.deck_id;
+			drawCards(52);
+			break;
+		case "gameDrawn":
+			deckCards = requestData.cards;
+			makeAcesPile();
+			if (debug) {
+				console.log("aces :");
+				console.log(aces);
+			}
+			makeSideTrackPile();
+			if (debug) {
+				console.log("sideTrackDeck :");
+				console.log(sideTrackDeck);
+			}
+			break;
+		default:
+			break;
+	}
 }
 
 
@@ -183,13 +238,7 @@ function getPlayersData () {
 function initGameScreen () {
 	showGameScreen();
 	activeScreen = "game";
-
-	if (gameLoaded) {
-		resetPMU();
-	} else {
-		setupAPI();
-		gameLoaded = true;
-	}
+	setupAPI();
 }
 
 function showGameScreen() {
@@ -204,21 +253,34 @@ function showGameScreen() {
 
 function setupAPI() {
 	/*create a deck of cards with the API*/
-
-	
+	APIState = "init";
+	request.open('GET', "https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1", true);
+	request.send();
 }
 
-function resetPMU() {
-	/*reset the whole game if it is not the first one*/
-	deckCardDropTop.classList.add("hidden");
-	resetAPI();
-
+function drawCards(x) {
+	//request the api to draw x cards from the deck
+	//(no deckId is given as parameter because it is global and we will use only one deck)
+	APIState = "gameDrawn";
+	request.open('GET', "https://deckofcardsapi.com/api/deck/"+deckId+"/draw/?count="+x, true);
+	request.send();
 }
 
+function makeAcesPile() {
+	//store the 4 aces in a separate list
+	var tmpCard;
+	for (i=0; i<deckCards.length; i++) {
+		if (deckCards[i].value == "ACE") {
+			tmpCard = deckCards.splice(i, 1)[0];
+			tmpCard.position = 0; //the position properti will give info about the position of the card/horse during the race
+			aces.push(tmpCard);
+		}
+	}
+}
 
-function reserAPI() {
-	/*reset the deck API, keep the same deckID but re shuffle the deck*/
-
+function makeSideTrackPile() {
+	//store the 5 cards on the side of the track in a separate list
+	sideTrackDeck = deckCards.splice(0, 5);
 }
 
 
@@ -284,11 +346,11 @@ function nextTurn () {
 
 function takeCardFromDeck () {
 	/*animation for taking a card from the deck*/
-	deckCardPick.classList.remove("pick-card");
+	deckCardPick.classList.remove("pick-deck-card");
 
 	setTimeout(function () {
 		/*20ms of delay to prevent stupid lag*/
-		deckCardPick.classList.add("pick-card");	
+		deckCardPick.classList.add("pick-deck-card");	
 	},20);
 }
 
@@ -300,12 +362,12 @@ function loadDropCard() {
 function dropCardOnDeck () {
 	/*animation to drop the card face up on the deck*/
 	setTimeout(function () {
-		deckCardDropTop.classList.remove("drop-card");
+		deckCardDropTop.classList.remove("drop-deck-card");
 	},400);
 	setTimeout(function () {
 		/*20ms of delay to prevent stupid lag*/
 		deckCardDropTop.classList.remove("hidden");
-		deckCardDropTop.classList.add("drop-card");
+		deckCardDropTop.classList.add("drop-deck-card");
 		copyTopBottomDeckCards();
 	},420);
 }
