@@ -80,10 +80,6 @@ body {
 /* -------------
  common buttons
 ---------------- */
-#button-top {
-	margin-left: 30em;
-	margin-right: 0;
-}
 
 .interactive-inner {
 	/*background-color: #FFFF99;*/
@@ -215,7 +211,6 @@ body {
 	}
 }
 
-
 .col-player-id {
 	width: 16%;
 	justify-content: flex-end;
@@ -243,6 +238,9 @@ body {
 	justify-content: center;
 }
 
+#goToTopHolder {
+	justify-content: flex-end;
+}
 
 /* ---------
  Game stuff

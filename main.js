@@ -493,6 +493,7 @@ function moveAceFwd() {
 function loadDropCard() {
 	/*load the next card to draw from the deck API*/
 	deckCardDropTop.src = deckCards[deckCardId].images.png;
+	deckCardDropTop.classList.remove("hidden");
 	deckCardId++;
 }
 
