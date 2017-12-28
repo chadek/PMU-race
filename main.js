@@ -17,7 +17,6 @@ var activeScreen = "menu";
 /*dev line : to remove later !!!*/
 activeScreen = "game";
 
-
 /* -------------------------
  menu variables & listeners
 ---------------------------- */
@@ -178,17 +177,16 @@ function showRules () {
 	javascript:location.href = '#rules';
 }
 
+function goToTop () {
+	document.documentElement.scrollTop = 0;
+}
+
 function startRace () {
 	/*go to game screen & start the race*/
 	event.preventDefault();
 	getPlayersData();
 	hideMenuScreen();
 	initGameScreen();
-}
-
-function goToTop () {
-	console.log("helloooo");
-	document.documentElement.scrollTop = 0;
 }
 
 function hideMenuScreen() {
@@ -224,8 +222,6 @@ function getPlayersData () {
 		console.log(playersData);
 	}
 }
-
-
 
 /* -------------
  game functions
@@ -322,7 +318,7 @@ function makeAcesPile() {
 	for (i=deckCards.length-1; i>=0; i--) { //reverse loop because splice changes superior indexes
 		if (deckCards[i].value == "ACE") {
 			tmpCard = deckCards.splice(i, 1)[0];
-			tmpCard.position = 0; //the position properti will give info about the position of the card/horse during the race
+			tmpCard.position = 0; //the position property will give info about the position of the card/horse during the race
 			aces.push(tmpCard);
 		}
 	}
