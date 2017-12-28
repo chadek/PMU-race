@@ -544,3 +544,7 @@ function seeResults() {
 	/*Load the resulsts screen*/
 
 }
+
+function goToRulesFunction() {
+	document.documentElement.scrollTop = 0;
+}
