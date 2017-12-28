@@ -81,6 +81,9 @@ var deckCardDropTop = document.querySelector("#deck-face-up .top-card");
 var deckCardDropBottom = document.querySelector("#deck-face-up .bottom-card");
 var deckCardId = 0; //Id of the next card to draw from the API deck
 
+
+var gameBoardSelector = document.querySelector("#game-board");
+
 /*track side variables*/
 var trackSideCardsBottom = document.querySelectorAll('.track-card .bottom-card');
 var trackSideCardsTop = document.querySelectorAll('.track-card .top-card');
@@ -120,12 +123,15 @@ var gameCommentary = document.querySelector('#game-commentary');
  common functions
 ------------------ */
 
+
 window.onresize = function(event) {
 	if (activeScreen == "game") { 
 		insertCardsinDesk();   
 		insertCardsinHolders();
+		resizeGameBoard();		
 	}
 };
+
 
 /* -------------
  menu functions
@@ -238,6 +244,7 @@ function showGameScreen() {
 		gameScreenSelector.classList.remove("hidden");
 		insertCardsinDesk();
 		insertCardsinHolders();
+		resizeGameBoard();	
 	},200);
 }
 
@@ -366,6 +373,11 @@ function insertCardsinHolders() {
 
 }
 insertCardsinHolders();
+
+
+function resizeGameBoard() {
+	gameBoardSelector.style.width = (parseInt(cardStyle.getPropertyValue('height'))*7)+"px";
+}
 
 
 
