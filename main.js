@@ -103,13 +103,16 @@ var raceInfos = {
 	-écrire les commentaires*/
 	firstId:0,
 	lastId:0,
-	nextSideCard:-1
+	nextSideCard:-1,
+	nbTurns:0,
+	raceOver:false
 }
-
 var prevRaceInfos = {};
-Object.assign(prevRaceInfos,raceInfos); //copy 
+Object.assign(prevRaceInfos,raceInfos); //copy
 //infos du tour précedent, 
 //pour comparer et faire des comentaires
+
+var gameCommentary = document.querySelector('#game-commentary');
 
 /* ---------------
  common functions
@@ -364,6 +367,7 @@ insertCardsinHolders();
 function nextTurn () {
 	if (nextTurnAvailable) {
 		nextTurnAvailable = false;
+		raceInfos.nbTurns++;
 		if (debug) {console.log("nextTurn");}
 		loadDropCard();
 		
@@ -384,20 +388,38 @@ function nextTurn () {
 						updateRaceInfos();
 					},800);
 				}
-				Object.assign(prevRaceInfos,raceInfos); //copy
+				SayAComment();
+				checkIfRaceIsOver();
+				if (raceInfos.raceOver) {
+					endRace();
+				} else {
+					Object.assign(prevRaceInfos,raceInfos); //copy			
+
+				}
 			},800);
+			coolDownNextTurn();
 		},800);
 		
 		/*
-		- move forward the card with the color of the deck card face up that's been loaded
+		- print comment
 		- check if someone won th race
-		else
-			- check if one side track card must be returned & do it
-			- move back the card with the color of the side card tht's been returned
 		*/
-		coolDownNextTurn();
+
 	}
 }
+
+function checkIfRaceIsOver () {
+	console.log("aces[raceInfos.firstId].position : " + aces[raceInfos.firstId].position);
+	if (aces[raceInfos.firstId].position >= 6) {
+		raceInfos.raceOver = true;
+	}
+}
+
+function SayAComment() {
+
+}
+
+
 function moveAceBkw() {
 	//checks wich Ace needs to move bkw & moves it
 	for (i=0; i<4; i++) {
@@ -429,10 +451,11 @@ function updateTrackSide() {
 
 function updateRaceInfos () {
 	for (i=0; i<4; i++) {
+		console.log("aces["+i+"].position" + aces[i].position);
 		if (aces[raceInfos.lastId].position > aces[i].position) {
 			raceInfos.lastId = i;
 		}
-		if (aces[raceInfos.firstId.position] < aces[i].position) {
+		if (aces[raceInfos.firstId].position < aces[i].position) {
 			raceInfos.firstId = i;
 		}
 	}
@@ -509,9 +532,13 @@ function coolDownNextTurn() {
 	/*wait some time before enabling the next turn*/
 	setTimeout(function () {
 		nextTurnAvailable = true;
-	},700);
+	},500);
 }
 
+function endRace() {
+	console.log ("WIIIIIIIIN");
+	gameCommentary.innerHTML = "Et c'est le cheval de la piste N° " + (raceInfos.firstId+1) + " qui remporte la victoire !";
+}
 
 function seeResults() {
 	/*Load the resulsts screen*/
