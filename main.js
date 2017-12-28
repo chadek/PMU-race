@@ -35,6 +35,8 @@ var buttonRules = document.querySelector("#button-rules");
 buttonRules.addEventListener('click', showRules);
 var buttonStart = document.querySelector("#button-start");
 buttonStart.addEventListener('click', startRace);
+var buttonTop = document.querySelector("#button-top");
+buttonTop.addEventListener('click', goToTop);
 
 var playersData = [];
 
@@ -129,7 +131,6 @@ window.onresize = function(event) {
  menu functions
 ---------------- */
 
-
 function changePlayerNumber() {
 	playerNumber = playerNumberSelector.options[playerNumberSelector.selectedIndex].value;
 	
@@ -165,7 +166,6 @@ function hideMenuPlayer(i) {
    	}, waitTime + 400);			
 }
 
-
 function showRules () {
 	/*show the game rules at the bottom of the menu screen*/
 	event.preventDefault();
@@ -178,6 +178,11 @@ function startRace () {
 	getPlayersData();
 	hideMenuScreen();
 	initGameScreen();
+}
+
+function goToTop () {
+	console.log("helloooo");
+	document.documentElement.scrollTop = 0;
 }
 
 function hideMenuScreen() {
@@ -543,8 +548,4 @@ function endRace() {
 function seeResults() {
 	/*Load the resulsts screen*/
 
-}
-
-function scrollToTopFunction() {
-	document.documentElement.scrollTop = 0;
 }
