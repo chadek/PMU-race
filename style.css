@@ -12,7 +12,7 @@ body {
 
 #wrapper {
 	min-height: 400px;
-	margin:50px 20px 60px 20px;
+	margin:30px 20px 60px 20px;
 	display: flex;
 	flex-direction: column;
 }
@@ -34,14 +34,14 @@ body {
 	position: absolute;
 	z-index: -10;
 	width: 500px;
-	transform: translateX(750px);
+	transform: translateX(750px) translateY(140px);
 }
 
 #cards-img {
 	position: absolute;
 	z-index: -10;
 	width: 300px;
-	transform: translateX(-330px) translateY(-20px);
+	transform: translateX(-330px) translateY(120px);
 }
 
 /* ------------
@@ -126,8 +126,9 @@ body {
 .interactive-outer:hover {
 	box-shadow: 1.5px 2px 12px rgba(0,0,0,1);
 	border-color: #717163;
-	background-color: /*#ddddbb*/#FFFF99;
+	background-color: #dddddd;
 	font-weight: bold;
+	color: #1b3864;
 	transition: background-color 0.2s, box-shadow 0.2s, font-weight 0.1s;
 
 }
