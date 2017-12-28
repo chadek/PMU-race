@@ -1,6 +1,7 @@
 body {
-	background: #009933;
-    background-image: url("img/texture.png");
+	background: #009933; /*fallback*/
+    background-image: url("img/texture.png"); /*fallback*/
+  background-image: url("img/texture.png"), linear-gradient(#004c19, #009933, #009933);
     background-repeat: repeat;
 	font-family: "Source Sans Pro";
 	overflow-x: hidden;
