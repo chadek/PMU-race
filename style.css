@@ -1,5 +1,7 @@
 body {
 	background: #009933;
+    background-image: url("img/texture.png");
+    background-repeat: repeat;
 	font-family: "Source Sans Pro";
 	overflow-x: hidden;
 	margin-left: auto;
