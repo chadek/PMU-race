@@ -33,9 +33,16 @@ body {
 #horse-img {
 	position: absolute;
 	width: 40em;
-	left: 60em;
-	top: 7em;
+	left: 75%;
 	z-index: -1;
+}
+
+#flags-img {
+	position: absolute;
+	z-index: -1;
+	right: 62%;
+	top: -10em;
+	transform: scale(0.6);
 }
 
 /* ------------
@@ -95,8 +102,13 @@ body {
 }
 
 .interactive-inner:hover {
-	background-color: #00802a;
+	background-color: black;
 	box-shadow: inset 0px 0px 10px rgba(0,50,0,1);
+}
+
+.rule-title, .rule-subtitle{
+	color : white;
+	text-decoration: underline; 
 }
 
 .interactive-outer {
@@ -108,11 +120,14 @@ body {
 	box-shadow: 1px 1px 8px rgba(0,0,0,0.8);
 	font-family: "Source sans pro", monospace;
 	font-size: 1.2em;
+	background-color: #FFFF99;
+	border-color: black;
 }
 
 .interactive-outer:hover {
 	box-shadow: 1.5px 2px 12px rgba(0,0,0,1);
-	background-color: #ddddbb;
+	background-color: black;
+	color : #FFFF99;
 
 }
 .interactive-outer:active {
