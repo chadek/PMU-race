@@ -32,17 +32,16 @@ body {
 
 #horse-img {
 	position: absolute;
-	width: 40em;
-	left: 75%;
-	z-index: -1;
+	z-index: -10;
+	width: 500px;
+	transform: translateX(750px);
 }
 
-#flags-img {
+#cards-img {
 	position: absolute;
-	z-index: -1;
-	right: 62%;
-	top: -10em;
-	transform: scale(0.6);
+	z-index: -10;
+	width: 300px;
+	transform: translateX(-330px) translateY(-20px);
 }
 
 /* ------------
@@ -102,8 +101,9 @@ body {
 }
 
 .interactive-inner:hover {
-	background-color: black;
-	box-shadow: inset 0px 0px 10px rgba(0,50,0,1);
+	background-color: #105627;
+	box-shadow: inset 0px 0px 10px rgba(0,20,0,1);
+	transition: background-color 0.1s, box-shadow 0.1s;
 }
 
 .rule-title, .rule-subtitle{
@@ -115,24 +115,24 @@ body {
 	height: 1.8em;
 	border-width: 1.2px;
 	border-radius: 8px;
+	border-color: #aaaaaa;
 	padding: 0px 12px 0px 12px;
 	background-color: white;
 	box-shadow: 1px 1px 8px rgba(0,0,0,0.8);
 	font-family: "Source sans pro", monospace;
 	font-size: 1.2em;
-	background-color: #FFFF99;
-	border-color: black;
 }
 
 .interactive-outer:hover {
 	box-shadow: 1.5px 2px 12px rgba(0,0,0,1);
-	background-color: black;
-	color : #FFFF99;
+	border-color: #717163;
+	background-color: /*#ddddbb*/#FFFF99;
+	font-weight: bold;
+	transition: background-color 0.2s, box-shadow 0.2s, font-weight 0.1s;
 
 }
 .interactive-outer:active {
 	box-shadow: inset 0px 0px 5px rgba(0,50,0,1);
-	background-color: #ddddbb;
 }
 
 .exit-screen-left {
