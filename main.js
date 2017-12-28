@@ -545,6 +545,6 @@ function seeResults() {
 
 }
 
-function goToRulesFunction() {
+function scrollToTopFunction() {
 	document.documentElement.scrollTop = 0;
 }
