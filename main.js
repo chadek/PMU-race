@@ -289,7 +289,7 @@ function requestAnswered(){
 }
 
 function loadAces() {
-	for (i=0; i<4; i++) { //causes bugs for unknown reason
+	for (i=0; i<4; i++) { //causes bugs for unknown reason -> normally fixed
 		acesSelector[i].src = aces[i].image;
 		acesSelector[i].classList.remove("hidden");		
 	}
@@ -312,7 +312,7 @@ function drawCards(x) {
 function makeAcesPile() {
 	//store the 4 aces in a separate list
 	var tmpCard;
-	for (i=0; i<deckCards.length; i++) {
+	for (i=deckCards.length-1; i>=0; i--) { //reverse loop because splice changes superior indexes
 		if (deckCards[i].value == "ACE") {
 			tmpCard = deckCards.splice(i, 1)[0];
 			tmpCard.position = 0; //the position properti will give info about the position of the card/horse during the race
