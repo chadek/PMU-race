@@ -532,6 +532,7 @@ body {
 	display: block;
 	text-align: center;
 	color: #FFFFFF;
+	display: none;
 }
 
 .winner, .other-players {
@@ -556,10 +557,7 @@ body {
 
 .footer {
 	text-align: center;
-	margin: auto;
 	height: 150px;
-	margin-top: 100px;
-
 }
 
 #imac-img {
@@ -575,9 +573,11 @@ body {
 	margin-bottom: 5px;
 }
 #footer-copyright {
-	margin-top: 100px;
+	margin-top: 80px;
 }
 
 #IMAC2020 {
 	font-size: 0.8em;
 }
+
+
