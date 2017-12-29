@@ -524,3 +524,30 @@ body {
 		flex-wrap: wrap;
 	}
 }
+
+/* -----------
+ Results screen
+-------------- */	
+
+#results-screen {
+	display: block;
+	text-align: center;
+	font-family: "Source sans pro", monospace;
+	color: #FFFFFF;
+}
+
+.winner, .other-players {
+	font-size: 1.5em;
+}
+
+.horseWinner {
+	color: #FFFF99;
+}
+
+.bet-number {
+	text-decoration:underline;
+}
+
+.player-number {
+	color: #FFFF99;
+}

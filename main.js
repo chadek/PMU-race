@@ -341,7 +341,7 @@ function insertCardsinDesk() {
 	}
 
 	deckCardStyle = window.getComputedStyle(deckCardsSelector[0]);
-	 deckCardWidth = deckCardStyle.getPropertyValue('width');
+	deckCardWidth = deckCardStyle.getPropertyValue('width');
 
 	for(i=0; i<decksSelector.length; i++) {
 		decksSelector[i].style.height = deckCardWidth;
@@ -361,7 +361,7 @@ function insertCardsinHolders() {
 	}
 
 	cardStyle = window.getComputedStyle(cardsSelector[0]);
-	 cardWidth = cardStyle.getPropertyValue('width');
+	cardWidth = cardStyle.getPropertyValue('width');
 
 	for(i=0; i<cardHoldersSelector.length; i++) {
 		cardHoldersSelector[i].style.height = cardWidth;
