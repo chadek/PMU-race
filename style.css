@@ -545,9 +545,13 @@ body {
 }
 
 .bet-number {
-	text-decoration:underline;
+	color: #b30000;
 }
 
 .player-number {
 	color: #FFFF99;
+}
+
+.give-number {
+	color: #0000b3;
 }

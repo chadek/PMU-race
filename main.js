@@ -555,5 +555,8 @@ function endRace() {
 
 function seeResults() {
 	/*Load the resulsts screen*/
-
+	var resultsScreen = document.querySelector("#results-screen");
+	event.preventDefault();
+	resultsScreen.classList.remove("hidden");
+	
 }
