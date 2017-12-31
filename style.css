@@ -48,12 +48,7 @@ body {
  common layout
 --------------- */
 
-.row {
-	display: flex;
-	flex-direction: row;
-}
-
-.row-fixed {
+.row, .row-fixed{
 	/*will not turn into a column in mobile*/
 	display: flex;
 	flex-direction: row;
@@ -79,9 +74,8 @@ body {
 }
 
 .hidden {
-	display: none;
+	display: none !important;
 }
-
 
 /* -------------
  common buttons
@@ -135,10 +129,29 @@ body {
 	box-shadow: inset 0px 0px 5px rgba(0,50,0,1);
 }
 
+.exit-screen-right {
+    animation-name: exitScreenRight;
+    animation-duration: 0.5s;
+    opacity: 0;
+}
+
 .exit-screen-left {
     animation-name: exitScreenLeft;
     animation-duration: 0.5s;
     opacity: 0;
+}
+
+
+@keyframes exitScreenRight {
+	0% {
+		transform: scale(0.9) translateX(500px);
+		opacity: 0;	
+	}
+	
+	100% { 
+		transform: scale(1);
+		opacity: 1;
+	}
 }
 
 @keyframes exitScreenLeft {
@@ -158,9 +171,27 @@ body {
     opacity: 1;
 }
 
+.enter-screen-left {
+    animation-name: enterScreenLeft;
+    animation-duration: 0.5s;
+    opacity: 1;
+}
+
 @keyframes enterScreenRight {
 	0% {
 		transform: scale(0.9) translateX(500px);
+		opacity: 0;	
+	}
+	
+	100% { 
+		transform: scale(1);
+		opacity: 1;
+	}
+}
+
+@keyframes enterScreenLeft {
+	0% {
+		transform: scale(0.9) translateX(-500px);
 		opacity: 0;	
 	}
 	
@@ -528,11 +559,10 @@ body {
  Results screen
 -------------- */	
 
-#results-screen {
+.results-hidden {
 	display: block;
 	text-align: center;
 	color: #FFFFFF;
-	display: none;
 }
 
 .winner, .other-players {

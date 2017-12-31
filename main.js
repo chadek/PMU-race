@@ -80,7 +80,6 @@ var deckCardDropTop = document.querySelector("#deck-face-up .top-card");
 var deckCardDropBottom = document.querySelector("#deck-face-up .bottom-card");
 var deckCardId = 0; //Id of the next card to draw from the API deck
 
-
 var gameBoardSelector = document.querySelector("#game-board");
 
 /*track side variables*/
@@ -117,6 +116,19 @@ Object.assign(prevRaceInfos,raceInfos); //copy
 //pour comparer et faire des comentaires
 
 var gameCommentary = document.querySelector('#game-commentary');
+
+/* ---------------------------------
+ results screen variables & listeners
+------------------------------------ */
+
+var resultsScreenSelector = document.querySelector("#results-screen");
+
+/*buttons*/
+
+var backToRace = document.querySelector("#back-to-race");
+backToRace.addEventListener('click', backTo);
+var newRace = document.querySelector("#new-race");
+newRace.addEventListener('click', backToMenu);
 
 /* ---------------
  common functions
@@ -375,8 +387,6 @@ function resizeGameBoard() {
 	gameBoardSelector.style.width = (parseInt(cardStyle.getPropertyValue('height'))*7)+"px";
 }
 
-
-
 function nextTurn () {
 	if (nextTurnAvailable) {
 		nextTurnAvailable = false;
@@ -529,8 +539,6 @@ function updateDeck () {
 }
 
 
-
-
 function copyTopBottomDeckCards () {
 	/*copy the top card face up of the deck to bottom card face up 
 	to prepare for next turn animation*/
@@ -554,9 +562,52 @@ function endRace() {
 }
 
 function seeResults() {
-	/*Load the resulsts screen*/
-	var resultsScreen = document.querySelector("#results-screen");
-	event.preventDefault();
-	resultsScreen.classList.remove("hidden");
-	
+	/*Load the results screen*/
+	activeScreen = "results";
+
+	gameScreenSelector.classList.add("exit-screen-left");
+	setTimeout(function () {
+		gameScreenSelector.classList.add("hidden");
+   	}, 200);
+
+	setTimeout(function () {
+		resultsScreenSelector.classList.remove("hidden");
+	}, 200);
+	resultsScreenSelector.classList.add("enter-screen-right");
+	console.log("porrrrr");
+
 }
+
+/* Functions for buttons in results sreen */
+
+function backTo() {
+	/* Back to Race */
+	activeScreen="game";
+
+	setTimeout(function () {
+		gameScreenSelector.classList.remove("hidden");
+	}, 200);
+	gameScreenSelector.classList.add("enter-screen-left");
+
+	resultsScreenSelector.classList.add("exit-screen-right");
+	setTimeout(function () {
+		resultsScreenSelector.classList.add("hidden");
+	}, 200);
+
+}
+
+function backToMenu () {
+
+	activeScreen="menu";
+
+	resultsScreenSelector.classList.add("exit-screen-right");
+	setTimeout(function () {
+		resultsScreenSelector.classList.add("hidden");
+	}, 200);
+
+	menuScreenSelector.classList.add("enter-screen-left");
+	setTimeout(function () {	
+		menuScreenSelector.classList.remove("hidden");
+	}, 200);
+
+}	
