@@ -113,7 +113,7 @@ var raceInfos = {
 var prevRaceInfos = {};
 Object.assign(prevRaceInfos,raceInfos); //copy
 //infos du tour précedent, 
-//pour comparer et faire des comentaires
+//pour comparer et faire des commentaires
 
 var gameCommentary = document.querySelector('#game-commentary');
 
@@ -425,7 +425,7 @@ function nextTurn () {
 		
 		/*
 		- print comment
-		- check if someone won th race
+		- check if someone won the race
 		*/
 
 	}
@@ -440,11 +440,30 @@ function checkIfRaceIsOver () {
 
 function SayAComment() {
 
+	var maxPosition;
+
+	for (i=4 ; i>=0 ; i--) {
+		for (j=0 ; j<4 ; j++) {
+			if (aces[j].position == i) {
+				gameCommentary.innerHTML = "Le poulain de la piste N° " + (raceInfos.firstId+1) + " est en tête !";
+				maxPosition = aces[j].position;
+				console.log('maxposition:' + maxPosition);
+			}
+			// for (k=0 ; k<4 ; k++) { // j'ai bugué LOL ça marche po
+			// 	if (k!=j) {
+			// 		if (aces[k].position == maxPosition) {
+			// 			console.log("k:" + k);
+			// 			gameCommentary.innerHTML += " Le poulain de la piste N° " + (k+1) + " rattrape le premier !";
+			// 		}
+			// 	}
+			// }
+		}
+	}
 }
 
 
 function moveAceBkw() {
-	//checks wich Ace needs to move bkw & moves it
+	//checks which Ace needs to move bkw & moves it
 	for (i=0; i<4; i++) {
 		if (sideTrackDeck[raceInfos.nextSideCard].suit == aces[i].suit) {
 			
@@ -558,7 +577,7 @@ function coolDownNextTurn() {
 
 function endRace() {
 	console.log ("WIIIIIIIIN");
-	gameCommentary.innerHTML = "Et c'est le cheval de la piste N° " + (raceInfos.firstId+1) + " qui remporte la victoire !";
+	gameCommentary.innerHTML = "Et c'est le poulain de la piste N° " + (raceInfos.firstId+1) + " qui remporte la victoire !";
 }
 
 function seeResults() {
@@ -574,7 +593,9 @@ function seeResults() {
 		resultsScreenSelector.classList.remove("hidden");
 	}, 200);
 	resultsScreenSelector.classList.add("enter-screen-right");
-	console.log("porrrrr");
+
+	var winner = raceInfos.firstId
+	//console.log("porrrrr");
 
 }
 
