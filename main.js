@@ -465,7 +465,7 @@ function SayAComment() {
 				+ " Il y a maintenant égalité entre le N°" + (k+1) + " et le N°" + (raceInfos.firstId+1) + " !";
 			}
 		}
-		//Afficher le recul d'une carte
+		//Afficher le recul d'une carte -> marche pas
 		for (var l=0 ; l<4 ; l++) {
 			var position = aces[l].position;
 			if (aces[l].position == position-1) {
@@ -477,21 +477,21 @@ function SayAComment() {
 		}
 	}
 	// Ex Aequo du reste de la course
-	if (position_1 == position_2 && position_2 == position_3 && position_3 == position_4) {
-		gameCommentary.innerHTML = "Tout le monde est ex aequo !";
-	}
-	if (position_1 == position_2) {
-		gameCommentary.innerHTML += " Les poulains de la piste 1 et 2 sont ex aequo !";
-	}
-	if (position_2 == position_3) {
-		gameCommentary.innerHTML += " Les poulains de la piste 2 et 3 sont ex aequo !";
-	}
-	if (position_3 == position_4) {
-		gameCommentary.innerHTML += " Les poulains de la piste 3 et 4 sont ex aequo !";
-	}
-	if (position_4 == position_2) {
-		gameCommentary.innerHTML += " Les poulains de la piste 3 et 4 sont ex aequo !";
-	}
+	// if (position_1 == position_2 && position_2 == position_3 && position_3 == position_4) {
+	// 	gameCommentary.innerHTML = "Tout le monde est ex aequo !";
+	// }
+	// if (position_1 == position_2) {
+	// 	gameCommentary.innerHTML += " Les poulains de la piste 1 et 2 sont ex aequo !";
+	// }
+	// if (position_2 == position_3) {
+	// 	gameCommentary.innerHTML += " Les poulains de la piste 2 et 3 sont ex aequo !";
+	// }
+	// if (position_3 == position_4) {
+	// 	gameCommentary.innerHTML += " Les poulains de la piste 3 et 4 sont ex aequo !";
+	// }
+	// if (position_4 == position_2) {
+	// 	gameCommentary.innerHTML += " Les poulains de la piste 3 et 4 sont ex aequo !";
+	// }
 
 }
 
