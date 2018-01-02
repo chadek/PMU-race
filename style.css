@@ -101,7 +101,7 @@ body {
 }
 
 .rule-title, .rule-subtitle{
-	color : white;
+	color : #FFFFFF;
 }
 
 .interactive-outer {
@@ -125,6 +125,7 @@ body {
 	transition: background-color 0.2s, box-shadow 0.2s, font-weight 0.1s;
 
 }
+
 .interactive-outer:active {
 	box-shadow: inset 0px 0px 5px rgba(0,50,0,1);
 }
@@ -273,10 +274,7 @@ body {
 .col-player-name {
 	width: 46%;
 }
-.col-player-horse {
-	width: 11%;
-}
-.col-player-bet {
+.col-player-horse, .col-player-bet {
 	width: 11%;
 }
 
@@ -305,14 +303,9 @@ body {
 	transform: rotate(90deg) translateY(-100%);
 }
 
-.bottom-card {
+.bottom-card, .top-card {
 	position: absolute;
 	z-index: -1;
-}
-
-.top-card {
-	position: absolute;
-	z-index: 1;
 }
 
 .drop-deck-card {
@@ -372,10 +365,6 @@ body {
 	z-index: -2;
 	width:100%;
   	margin: 0;
-}
-
-#track-side {
-	justify-content: center;
 }
 
 .card-holder {
@@ -480,16 +469,12 @@ body {
 }
 
 
-#game-commentary {
+#game-commentary, #game-buttons, #track-side {
 	justify-content: center;
 }
 
 #game-commentary h3 {
 	margin: 0;	
-}
-
-#game-buttons {
-	justify-content: center;
 }
 
 
@@ -553,6 +538,7 @@ body {
 		flex-direction: row;
 		flex-wrap: wrap;
 	}
+
 }
 
 /* -----------
@@ -569,16 +555,12 @@ body {
 	font-size: 1.5em;
 }
 
-.horseWinner {
+.horseWinner, .player-number {
 	color: #FFFF99;
 }
 
 .bet-number {
 	color: #b30000;
-}
-
-.player-number {
-	color: #FFFF99;
 }
 
 .give-number {
@@ -599,9 +581,11 @@ body {
 	margin-top: 1px;
 	margin-bottom: 0px;
 }
+
 #footer-copyright, #footer-link-to-API{
 	margin-bottom: 5px;
 }
+
 #footer-copyright {
 	margin-top: 80px;
 }
@@ -609,5 +593,4 @@ body {
 #IMAC2020 {
 	font-size: 0.8em;
 }
-
 

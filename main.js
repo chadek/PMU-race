@@ -2,7 +2,7 @@
 /*
 règles de syntaxe :
 - tous les noms de variables en camelCase
-- ajouter Selector derrière le nom de la variable quand celle cie est un élément du DOM
+- ajouter Selector derrière le nom de la variable quand celle-ci est un élément du DOM
 */
 
 
@@ -441,24 +441,58 @@ function checkIfRaceIsOver () {
 function SayAComment() {
 
 	var maxPosition;
+	var position_1 = aces[0].position;
+	var position_2 = aces[1].position;
+	var position_3 = aces[2].position;
+	var position_4 = aces[3].position;
+	raceInfos;
 
-	for (i=4 ; i>=0 ; i--) {
+	for (var i=4 ; i>0 ; i--) {
+		//Afficher le premier + déterminer la position max
 		for (j=0 ; j<4 ; j++) {
 			if (aces[j].position == i) {
 				gameCommentary.innerHTML = "Le poulain de la piste N° " + (raceInfos.firstId+1) + " est en tête !";
-				maxPosition = aces[j].position;
+				maxPosition = aces[raceInfos.firstId].position;
 				console.log('maxposition:' + maxPosition);
+				console.log('i: ' + i);
 			}
-			// for (k=0 ; k<4 ; k++) { // j'ai bugué LOL ça marche po
-			// 	if (k!=j) {
-			// 		if (aces[k].position == maxPosition) {
-			// 			console.log("k:" + k);
-			// 			gameCommentary.innerHTML += " Le poulain de la piste N° " + (k+1) + " rattrape le premier !";
-			// 		}
-			// 	}
-			// }
+		}
+		//Afficher les ex aequo de la première place
+		for (var k=0 ; k<4 ; k++) {
+			if (aces[k].position == maxPosition && k != raceInfos.firstId) {
+				console.log("k: " + k);
+				gameCommentary.innerHTML = " Le poulain de la piste N°" + (k+1) + " rattrape le premier !"
+				+ " Il y a maintenant égalité entre le N°" + (k+1) + " et le N°" + (raceInfos.firstId+1) + " !";
+			}
+		}
+		//Afficher le recul d'une carte
+		for (var l=0 ; l<4 ; l++) {
+			var position = aces[l].position;
+			if (aces[l].position == position-1) {
+				console.log("l:" + l);
+				console.log("aces[l].position :" + aces[l].position);
+				console.log("aces[l].position-1 :" + (aces[l].position)-1);
+				gameCommentary.innerHTML += " Le poulain de la piste N°" + (0) + " a reculé d'un pas !";
+			}
 		}
 	}
+	// Ex Aequo du reste de la course
+	if (position_1 == position_2 && position_2 == position_3 && position_3 == position_4) {
+		gameCommentary.innerHTML = "Tout le monde est ex aequo !";
+	}
+	if (position_1 == position_2) {
+		gameCommentary.innerHTML += " Les poulains de la piste 1 et 2 sont ex aequo !";
+	}
+	if (position_2 == position_3) {
+		gameCommentary.innerHTML += " Les poulains de la piste 2 et 3 sont ex aequo !";
+	}
+	if (position_3 == position_4) {
+		gameCommentary.innerHTML += " Les poulains de la piste 3 et 4 sont ex aequo !";
+	}
+	if (position_4 == position_2) {
+		gameCommentary.innerHTML += " Les poulains de la piste 3 et 4 sont ex aequo !";
+	}
+
 }
 
 
@@ -587,11 +621,11 @@ function seeResults() {
 	gameScreenSelector.classList.add("exit-screen-left");
 	setTimeout(function () {
 		gameScreenSelector.classList.add("hidden");
-   	}, 200);
+   	}, 400);
 
 	setTimeout(function () {
 		resultsScreenSelector.classList.remove("hidden");
-	}, 200);
+	}, 400);
 	resultsScreenSelector.classList.add("enter-screen-right");
 
 	var winner = raceInfos.firstId
@@ -607,13 +641,13 @@ function backTo() {
 
 	setTimeout(function () {
 		gameScreenSelector.classList.remove("hidden");
-	}, 200);
+	}, 400);
 	gameScreenSelector.classList.add("enter-screen-left");
 
 	resultsScreenSelector.classList.add("exit-screen-right");
 	setTimeout(function () {
 		resultsScreenSelector.classList.add("hidden");
-	}, 200);
+	}, 400);
 
 }
 
@@ -624,11 +658,11 @@ function backToMenu () {
 	resultsScreenSelector.classList.add("exit-screen-right");
 	setTimeout(function () {
 		resultsScreenSelector.classList.add("hidden");
-	}, 200);
+	}, 400);
 
 	menuScreenSelector.classList.add("enter-screen-left");
 	setTimeout(function () {	
 		menuScreenSelector.classList.remove("hidden");
-	}, 200);
+	}, 400);
 
 }	
