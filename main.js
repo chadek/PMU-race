@@ -14,8 +14,6 @@ var debug = true;
 
 var activeScreen = "menu";
 
-/*dev line : to remove later !!!*/
-activeScreen = "game";
 
 /* -------------------------
  menu variables & listeners
@@ -101,7 +99,8 @@ var raceInfos = {
 	lastId:0,
 	nextSideCard:-1,
 	nbTurns:0,
-	raceGoing:false
+	raceGoing:false,
+	raceOver:false
 }
 var prevRaceInfos = {};
 Object.assign(prevRaceInfos,raceInfos); //copy
@@ -160,6 +159,47 @@ window.onresize = function(event) {
 	}
 };
 
+function insertCardsinDesk() {
+	/*compute the CSS style for the deck card 
+	(because it's been rotated so it sucks)*/
+	deckStyle = window.getComputedStyle(decksSelector[0]);
+	deckWidth = deckStyle.getPropertyValue('width');
+
+	for(i=0; i<deckCardsSelector.length; i++) {
+		deckCardsSelector[i].style.height = deckWidth;
+	}
+
+	deckCardStyle = window.getComputedStyle(deckCardsSelector[0]);
+	deckCardWidth = deckCardStyle.getPropertyValue('width');
+
+	for(i=0; i<decksSelector.length; i++) {
+		decksSelector[i].style.height = deckCardWidth;
+	}
+}
+
+function insertCardsinHolders() {
+	/*compute the CSS style for the card on the board
+	 (because it's been rotated so it sucks)*/
+	cardHolderStyle = window.getComputedStyle(cardHoldersSelector[0]);
+	cardHolderWidth = cardHolderStyle.getPropertyValue('width');
+
+	for(i=0; i<cardsSelector.length; i++) {
+		cardsSelector[i].style.height = cardHolderWidth;
+	}
+
+	cardStyle = window.getComputedStyle(cardsSelector[0]);
+	cardWidth = cardStyle.getPropertyValue('width');
+
+	for(i=0; i<cardHoldersSelector.length; i++) {
+		cardHoldersSelector[i].style.height = cardWidth;
+	}
+
+}
+
+function resizeGameBoard() {
+	gameBoardSelector.style.width = (parseInt(cardStyle.getPropertyValue('height'))*7)+"px";
+}
+
 
 /* -------------
  menu functions
@@ -200,15 +240,18 @@ function hideMenuPlayer(i) {
    	}, waitTime + 400);			
 }
 
+
 function showRules () {
 	/*show the game rules at the bottom of the menu screen*/
 	event.preventDefault();
 	javascript:location.href = '#rules';
 }
 
+
 function goToTop () {
 	window.scrollTo(0,0);
 }
+
 
 function startRace () {
 	/*go to game screen & start the race*/
@@ -217,14 +260,6 @@ function startRace () {
 	hideMenuScreen();
 	initGameScreen();
 }
-
-function hideMenuScreen() {
-	menuScreenSelector.classList.add("exit-screen-left");
-	
-	setTimeout(function () {
-		menuScreenSelector.classList.add("hidden");
-   	}, 200);
-}   	
 
 function getPlayersData () {
 	//store players names, horses & bets
@@ -251,6 +286,14 @@ function getPlayersData () {
 		console.log(playersData);
 	}
 }
+
+function hideMenuScreen() {
+	menuScreenSelector.classList.add("exit-screen-left");
+	
+	setTimeout(function () {
+		menuScreenSelector.classList.add("hidden");
+   	}, 200);
+}   
 
 /* -------------
  game functions
@@ -287,7 +330,7 @@ request.onreadystatechange = function() {
 };
 
 function requestAnswered(){
-	/*do stuff with the request*/
+	/*do stuff with the request - is also used as part 2 of initGameScreen function*/
 	requestData = JSON.parse(request.responseText);
 	if (debug) {
 		console.log("APIState : " + APIState);
@@ -320,19 +363,6 @@ function requestAnswered(){
 	}
 }
 
-function loadAces() {
-	for (i=0; i<4; i++) { //causes bugs for unknown reason -> normally fixed
-		acesSelector[i].src = aces[i].image;
-		acesSelector[i].classList.remove("hidden");		
-	}
-}
-
-function loadSideTrackCards() {
-	for (i=0; i<5; i++) {
-		trackSideCardsTop[i].src = sideTrackDeck[i].images.png;
-	}
-}
-
 function drawCards(x) {
 	//request the api to draw x cards from the deck
 	//(no deckId is given as parameter because it is global and we will use only one deck)
@@ -358,51 +388,19 @@ function makeSideTrackPile() {
 	sideTrackDeck = deckCards.splice(0, 5);
 }
 
-
-function insertCardsinDesk() {
-	/*compute the CSS style for the deck card 
-	(because it's been rotated so it sucks)*/
-	deckStyle = window.getComputedStyle(decksSelector[0]);
-	deckWidth = deckStyle.getPropertyValue('width');
-
-	for(i=0; i<deckCardsSelector.length; i++) {
-		deckCardsSelector[i].style.height = deckWidth;
-	}
-
-	deckCardStyle = window.getComputedStyle(deckCardsSelector[0]);
-	deckCardWidth = deckCardStyle.getPropertyValue('width');
-
-	for(i=0; i<decksSelector.length; i++) {
-		decksSelector[i].style.height = deckCardWidth;
+function loadSideTrackCards() {
+	for (i=0; i<5; i++) {
+		trackSideCardsTop[i].src = sideTrackDeck[i].images.png;
 	}
 }
-insertCardsinDesk();
 
-
-function insertCardsinHolders() {
-	/*compute the CSS style for the card on the board
-	 (because it's been rotated so it sucks)*/
-	cardHolderStyle = window.getComputedStyle(cardHoldersSelector[0]);
-	cardHolderWidth = cardHolderStyle.getPropertyValue('width');
-
-	for(i=0; i<cardsSelector.length; i++) {
-		cardsSelector[i].style.height = cardHolderWidth;
+function loadAces() {
+	for (i=0; i<4; i++) { //causes bugs for unknown reason -> normally fixed
+		acesSelector[i].src = aces[i].image;
+		acesSelector[i].classList.remove("hidden");		
 	}
-
-	cardStyle = window.getComputedStyle(cardsSelector[0]);
-	cardWidth = cardStyle.getPropertyValue('width');
-
-	for(i=0; i<cardHoldersSelector.length; i++) {
-		cardHoldersSelector[i].style.height = cardWidth;
-	}
-
 }
-insertCardsinHolders();
 
-
-function resizeGameBoard() {
-	gameBoardSelector.style.width = (parseInt(cardStyle.getPropertyValue('height'))*7)+"px";
-}
 
 function nextTurn () {
 	if (nextTurnAvailable && raceInfos.raceGoing) {
@@ -445,6 +443,107 @@ function nextTurn () {
 		- check if someone won the race
 		*/
 
+	}
+}
+
+function loadDropCard() {
+	/*load the next card to draw from the deck API*/
+	deckCardDropTop.src = deckCards[deckCardId].images.png;
+	deckCardId++;
+}
+
+function updateDeck () {
+	/*animation for taking a card from the deck*/
+	deckCardPick.classList.remove("pick-deck-card");
+
+	setTimeout(function () {
+		/*20ms of delay to prevent stupid lag*/
+		deckCardPick.classList.add("pick-deck-card");	
+	},20);
+
+	setTimeout(function () {
+	/*animation to drop the card face up on the deck*/
+	deckCardDropTop.classList.remove("drop-deck-card");
+	},420);
+
+	setTimeout(function () {
+		/*20ms of delay to prevent stupid lag*/
+		deckCardDropTop.classList.remove("hidden");
+		deckCardDropTop.classList.add("drop-deck-card");
+		copyTopBottomDeckCards();
+	},440);
+}
+
+function copyTopBottomDeckCards () {
+	/*copy the top card face up of the deck to bottom card face up 
+	to prepare for next turn animation*/
+	setTimeout(function () {
+		deckCardDropBottom.src = deckCardDropTop.src;
+		deckCardDropTop.classList.add("hidden");
+	},400);
+}
+
+function moveAceFwd() {
+	//checks wich Ace needs to move fwd & moves it
+	for (i=0; i<4; i++) {
+		if (deckCards[deckCardId-1].suit == aces[i].suit) {
+			
+			aces[i].position++;
+
+			aceHoldersSelector[i].classList.remove("move-card-right");
+			aceHoldersSelector[i].classList.remove("move-card-left");
+
+			setTimeout(function (i) {
+				/*20ms of delay to prevent stupid lag*/
+				var marginLeftTmp = 14.29*aces[i].position;
+				aceHoldersSelector[i].style.marginLeft = ""+marginLeftTmp+"%";
+				aceHoldersSelector[i].classList.add("move-card-right");
+			},20,i);
+		}
+	}
+}
+
+function updateRaceInfos () {
+	for (i=0; i<4; i++) {
+		console.log("aces["+i+"].position" + aces[i].position);
+		if (aces[raceInfos.lastId].position > aces[i].position) {
+			raceInfos.lastId = i;
+		}
+		if (aces[raceInfos.firstId].position < aces[i].position) {
+			raceInfos.firstId = i;
+		}
+	}
+	raceInfos.nextSideCard = Math.max(raceInfos.nextSideCard, aces[raceInfos.lastId].position-1);
+	console.log("raceInfos");
+	console.log(raceInfos);
+}
+
+function updateTrackSide() {
+	if (raceInfos.nextSideCard < 5) {
+		trackSideCardsBottom[raceInfos.nextSideCard].classList.add("pick-track-card");
+		setTimeout(function () {
+			trackSideCardsTop[raceInfos.nextSideCard].classList.remove("hidden");
+		},400);
+	}
+}
+
+function moveAceBkw() {
+	//checks which Ace needs to move bkw & moves it
+	for (i=0; i<4; i++) {
+		if (sideTrackDeck[raceInfos.nextSideCard].suit == aces[i].suit) {
+			
+			aces[i].position--;
+
+			aceHoldersSelector[i].classList.remove("move-card-right");
+			aceHoldersSelector[i].classList.remove("move-card-left");
+
+			setTimeout(function (i) {
+				/*20ms of delay to prevent stupid lag*/
+				var marginLeftTmp = 14.29*aces[i].position;
+				aceHoldersSelector[i].style.marginLeft = ""+marginLeftTmp+"%";
+				aceHoldersSelector[i].classList.add("move-card-left");
+			},20,i);
+		}
 	}
 }
 
@@ -506,182 +605,10 @@ function callHorse (i) {
 	}
 } 
 
-/*
-function stellaSaysAComment() {
-
-	var maxPosition;
-	var position_1 = aces[0].position;
-	var position_2 = aces[1].position;
-	var position_3 = aces[2].position;
-	var position_4 = aces[3].position;
-	var nbrExAequo = 0;
-	var Joueurs = { x:3, y:2 };
-
-
-	for (var i=4 ; i>=0 ; i--) {
-		//Afficher le premier + déterminer la position max
-		for (var j=0 ; j<4 ; j++) {
-			if (aces[j].position == i) {
-				gameCommentary.innerHTML = "Le poulain de la piste N° " + (raceInfos.firstId+1) + " est en tête !";
-				maxPosition = aces[raceInfos.firstId].position;
-				console.log('maxposition:' + maxPosition);
-				console.log('i: ' + i);
-			}
-			if (i != 0 && aces[j].position == (i-1)) {
-				gameCommentary.innerHTML += " Le poulain de la piste N° " + j + " suit de près le premier !";
-			}
-		}
-		//Afficher les ex aequo de la première place
-		for (var k=0 ; k<4 ; k++) {
-			if (aces[k].position == maxPosition && k != raceInfos.firstId) {
-				console.log("k: " + k);
-				gameCommentary.innerHTML = " Le poulain de la piste N°" + (k+1) + " rattrape la tête de course !";
-			}
-		}
-		//Afficher le recul d'une carte -> marche pas
-		// for (var l=0 ; l<4 ; l++) {
-		// 	var position = aces[l].position;
-		// 	if (moveAceBkw()) {
-		// 		console.log("l:" + l);
-		// 		console.log("aces[l].position :" + aces[l].position);
-		// 		console.log("aces[l].position-1 :" + (aces[l].position)-1);
-		// 		gameCommentary.innerHTML += " Le poulain de la piste N°" + (0) + " a reculé d'un pas !";
-		// 	}
-		// }
-	}
-	// Ex Aequo du reste de la course
-	if (position_1 != 0 && position_2 != 0 && position_3 != 0 && position_4 != 0) {
-		if (position_1 == position_2 && position_2 == position_3 && position_3 == position_4) {
-			gameCommentary.innerHTML = "Tout le monde est ex aequo !";
-		}
-		if (position_1 == position_2) {
-			gameCommentary.innerHTML += " Les poulains de la piste 1 et 2 sont ex aequo !";
-		}
-		if (position_1 == position_3) {
-			gameCommentary.innerHTML += " Les poulains de la piste 1 et 3 sont ex aequo !";
-		}
-		if (position_1 == position_4) {
-			gameCommentary.innerHTML += " Les poulains de la piste 1 et 4 sont ex aequo !";
-		}
-		if (position_2 == position_3) {
-			gameCommentary.innerHTML += " Les poulains de la piste 2 et 3 sont ex aequo !";
-		}
-		if (position_2 == position_4) {
-			gameCommentary.innerHTML += " Les poulains de la piste 2 et 4 sont ex aequo !";
-		}
-		if (position_3 == position_4) {
-			gameCommentary.innerHTML += " Les poulains de la piste 3 et 4 sont ex aequo !";
-		}
-
-	}
+function endRace() {
+	raceInfos.raceOver = true;
+	console.log ("WIIIIIIIIN");
 }
-*/
-
-function moveAceBkw() {
-	//checks which Ace needs to move bkw & moves it
-	for (i=0; i<4; i++) {
-		if (sideTrackDeck[raceInfos.nextSideCard].suit == aces[i].suit) {
-			
-			aces[i].position--;
-
-			aceHoldersSelector[i].classList.remove("move-card-right");
-			aceHoldersSelector[i].classList.remove("move-card-left");
-
-			setTimeout(function (i) {
-				/*20ms of delay to prevent stupid lag*/
-				var marginLeftTmp = 14.29*aces[i].position;
-				aceHoldersSelector[i].style.marginLeft = ""+marginLeftTmp+"%";
-				aceHoldersSelector[i].classList.add("move-card-left");
-			},20,i);
-		}
-	}
-}
-
-function updateTrackSide() {
-	if (raceInfos.nextSideCard < 5) {
-		trackSideCardsBottom[raceInfos.nextSideCard].classList.add("pick-track-card");
-		setTimeout(function () {
-			trackSideCardsTop[raceInfos.nextSideCard].classList.remove("hidden");
-		},400);
-	}
-}
-
-function updateRaceInfos () {
-	for (i=0; i<4; i++) {
-		console.log("aces["+i+"].position" + aces[i].position);
-		if (aces[raceInfos.lastId].position > aces[i].position) {
-			raceInfos.lastId = i;
-		}
-		if (aces[raceInfos.firstId].position < aces[i].position) {
-			raceInfos.firstId = i;
-		}
-	}
-	raceInfos.nextSideCard = Math.max(raceInfos.nextSideCard, aces[raceInfos.lastId].position-1);
-	console.log("raceInfos");
-	console.log(raceInfos);
-}
-
-function moveAceFwd() {
-	//checks wich Ace needs to move fwd & moves it
-	for (i=0; i<4; i++) {
-		if (deckCards[deckCardId-1].suit == aces[i].suit) {
-			
-			aces[i].position++;
-
-			aceHoldersSelector[i].classList.remove("move-card-right");
-			aceHoldersSelector[i].classList.remove("move-card-left");
-
-			setTimeout(function (i) {
-				/*20ms of delay to prevent stupid lag*/
-				var marginLeftTmp = 14.29*aces[i].position;
-				aceHoldersSelector[i].style.marginLeft = ""+marginLeftTmp+"%";
-				aceHoldersSelector[i].classList.add("move-card-right");
-			},20,i);
-		}
-	}
-}
-
-
-function loadDropCard() {
-	/*load the next card to draw from the deck API*/
-	deckCardDropTop.src = deckCards[deckCardId].images.png;
-	deckCardId++;
-}
-
-
-
-function updateDeck () {
-	/*animation for taking a card from the deck*/
-	deckCardPick.classList.remove("pick-deck-card");
-
-	setTimeout(function () {
-		/*20ms of delay to prevent stupid lag*/
-		deckCardPick.classList.add("pick-deck-card");	
-	},20);
-
-	setTimeout(function () {
-	/*animation to drop the card face up on the deck*/
-	deckCardDropTop.classList.remove("drop-deck-card");
-	},420);
-
-	setTimeout(function () {
-		/*20ms of delay to prevent stupid lag*/
-		deckCardDropTop.classList.remove("hidden");
-		deckCardDropTop.classList.add("drop-deck-card");
-		copyTopBottomDeckCards();
-	},440);
-}
-
-
-function copyTopBottomDeckCards () {
-	/*copy the top card face up of the deck to bottom card face up 
-	to prepare for next turn animation*/
-	setTimeout(function () {
-		deckCardDropBottom.src = deckCardDropTop.src;
-		deckCardDropTop.classList.add("hidden");
-	},400);
-}
-
 
 function coolDownNextTurn() {
 	/*wait some time before enabling the next turn*/
@@ -690,13 +617,10 @@ function coolDownNextTurn() {
 	},500);
 }
 
-function endRace() {
-	console.log ("WIIIIIIIIN");
-}
 
 function seeResults() {
-	/*Load the results screen*/
-	if (!raceInfos.raceGoing) {
+	/*Load the results screen when button is pressed*/
+	if (raceInfos.raceOver) {
 		activeScreen = "results";
 
 		gameScreenSelector.classList.remove("enter-screen-left");
@@ -715,7 +639,10 @@ function seeResults() {
 	}
 }
 
-/* Functions for buttons in results sreen */
+
+/* ----------------
+ results functions
+------------------- */
 
 function backToRace() {
 	/* Back to Race */
