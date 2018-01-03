@@ -65,13 +65,6 @@ var cardsSelector = document.getElementsByClassName('card');
 var cardStyle = window.getComputedStyle(cardsSelector[0]);
 var cardWidth = cardStyle.getPropertyValue('width');
 
-/*buttons*/
-var buttonNextTurn = document.querySelector("#next-turn");
-buttonNextTurn.addEventListener('click', nextTurn);
-
-var buttonSeeResults = document.querySelector("#see-results");
-buttonSeeResults.addEventListener('click', seeResults);
-
 /*deck variables*/
 var deckDiv = document.querySelector("#deck-face-down");
 deckDiv.addEventListener('click', nextTurn);
@@ -108,14 +101,38 @@ var raceInfos = {
 	lastId:0,
 	nextSideCard:-1,
 	nbTurns:0,
-	raceOver:false
+	raceGoing:false
 }
 var prevRaceInfos = {};
 Object.assign(prevRaceInfos,raceInfos); //copy
 //infos du tour précedent, 
 //pour comparer et faire des commentaires
 
+/*comments variable*/
 var gameCommentary = document.querySelector('#game-commentary');
+
+var comment = ""; //the comment that will be displayed
+var commentPrefix = ["Attention attention, ",
+					 "Oh lala ", 
+					 "Regardez ce qu'il ce passe ! C'est que ", 
+					 "Et ce tour, ",
+					 "Ah, ",
+					 "Oh, ",
+					 "Et "];
+var horseName = ""; //how will be called the horse that is being commented : by suit or track ?
+var suitInFrench = {"CLUBS": "trèfle",
+					"DIAMONDS": "carreau",
+					"HEARTS": "coeur",
+					"SPADES": "pique"
+					}
+var commentMade = false; //has the comment already been calculated ?
+
+/*buttons*/
+var buttonNextTurn = document.querySelector("#next-turn");
+buttonNextTurn.addEventListener('click', nextTurn);
+
+var buttonSeeResults = document.querySelector("#see-results");
+buttonSeeResults.addEventListener('click', seeResults);
 
 /* ---------------------------------
  results screen variables & listeners
@@ -296,6 +313,7 @@ function requestAnswered(){
 			}
 			loadSideTrackCards();
 			loadAces();
+			raceInfos.raceGoing = true; //la course peut commencer
 			break;
 		default:
 			break;
@@ -387,7 +405,7 @@ function resizeGameBoard() {
 }
 
 function nextTurn () {
-	if (nextTurnAvailable) {
+	if (nextTurnAvailable && raceInfos.raceGoing) {
 		nextTurnAvailable = false;
 		raceInfos.nbTurns++;
 		if (debug) {console.log("nextTurn");}
@@ -410,9 +428,9 @@ function nextTurn () {
 						updateRaceInfos();
 					},800);
 				}
-				SayAComment();
 				checkIfRaceIsOver();
-				if (raceInfos.raceOver) {
+				sayAComment();
+				if (!raceInfos.raceGoing) {
 					endRace();
 				} else {
 					Object.assign(prevRaceInfos,raceInfos); //copy			
@@ -433,11 +451,63 @@ function nextTurn () {
 function checkIfRaceIsOver () {
 	console.log("aces[raceInfos.firstId].position : " + aces[raceInfos.firstId].position);
 	if (aces[raceInfos.firstId].position >= 6) {
-		raceInfos.raceOver = true;
+		raceInfos.raceGoing = false;
 	}
 }
 
-function SayAComment() {
+function sayAComment() {
+	console.log("saying a comment");
+	commentMade = false;
+	comment = commentPrefix[Math.floor(Math.random() * commentPrefix.length)];
+
+	if (raceInfos.nbTurns == 1) {
+		comment += callHorse(raceInfos.firstId) + " démarre sur les chapeaux de roues !";
+		commentMade = true;
+	} else if (!raceInfos.raceGoing) {
+		comment += callHorse(raceInfos.firstId) + " gagne la course !!!";
+		commentMade = true;
+	} else if (raceInfos.firstId != prevRaceInfos.firstId) {
+		comment += callHorse(raceInfos.firstId) + " prend la tête de course !!";
+		commentMade = true;
+	} else if (raceInfos.lastId != prevRaceInfos.lastId && Math.random() < 0.4) {
+		comment += callHorse(raceInfos.lastId) + " passe dernier...";
+		commentMade = true;
+	} 
+
+	else {
+		for (i=0; i<4; i++) {
+			if (i != raceInfos.firstId && aces[i].position == aces[raceInfos.firstId].position && !commentMade&& Math.random() < 0.8) {
+				comment += callHorse(i) + " et " + callHorse(raceInfos.firstId) + " se battent pour la première place ! Allez !!";
+				commentMade = true;
+			}
+
+			if (i != raceInfos.lastId && aces[i].position == aces[raceInfos.lastId].position && !commentMade  && Math.random() < 0.4) {
+				comment += callHorse(i) + " et " + callHorse(raceInfos.lastId) + " sont tous les 2 derniers ... Il faut se ressaisir !";
+				commentMade = true;
+			} 
+		}
+	}
+
+	if (!commentMade  && Math.random() < 0.7) {
+		comment += callHorse(raceInfos.firstId) + " conserve sa première place...";
+	} else if (!commentMade) {
+		comment += callHorse(raceInfos.lastId) + " est dernier... Du nerf l'ami !";
+	}
+
+	gameCommentary.innerHTML = comment;
+}
+
+function callHorse (i) {
+	//return a name for the horse with id i
+	if (Math.random() < 0.7) {
+		return ("l'as de " + suitInFrench[aces[i].suit]);
+	} else {
+		return ("le poulain de la piste " + (i+1));
+	}
+} 
+
+/*
+function stellaSaysAComment() {
 
 	var maxPosition;
 	var position_1 = aces[0].position;
@@ -505,7 +575,7 @@ function SayAComment() {
 
 	}
 }
-
+*/
 
 function moveAceBkw() {
 	//checks which Ace needs to move bkw & moves it
@@ -622,28 +692,27 @@ function coolDownNextTurn() {
 
 function endRace() {
 	console.log ("WIIIIIIIIN");
-	gameCommentary.innerHTML = "Et c'est le poulain de la piste N° " + (raceInfos.firstId+1) + " qui remporte la victoire !";
 }
 
 function seeResults() {
 	/*Load the results screen*/
-	activeScreen = "results";
+	if (!raceInfos.raceGoing) {
+		activeScreen = "results";
 
-	gameScreenSelector.classList.remove("enter-screen-left");
-	gameScreenSelector.classList.remove("enter-screen-right");
-	gameScreenSelector.classList.add("exit-screen-left");
+		gameScreenSelector.classList.remove("enter-screen-left");
+		gameScreenSelector.classList.remove("enter-screen-right");
+		gameScreenSelector.classList.add("exit-screen-left");
 
-	resultsScreenSelector.classList.add("enter-screen-right");
-	
-	setTimeout(function () {
-		gameScreenSelector.classList.add("hidden");
-		resultsScreenSelector.classList.remove("hidden");
-   	}, 200);
+		resultsScreenSelector.classList.add("enter-screen-right");
+		
+		setTimeout(function () {
+			gameScreenSelector.classList.add("hidden");
+			resultsScreenSelector.classList.remove("hidden");
+	   	}, 200);
 
-	var winner = raceInfos.firstId
-	
-	//console.log("porrrrr");
-
+	} else {
+		gameCommentary.innerHTML = "Pas si vite l'ami, attends que la course soit finie !";
+	}
 }
 
 /* Functions for buttons in results sreen */
