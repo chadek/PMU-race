@@ -124,6 +124,11 @@ var suitInFrench = {"CLUBS": "trèfle",
 					"HEARTS": "coeur",
 					"SPADES": "pique"
 					}
+var suitInSymbols = {"CLUBS": "♣",
+					"DIAMONDS": "♦",
+					"HEARTS": "♥",
+					"SPADES": "♠"
+					}
 var commentMade = false; //has the comment already been calculated ?
 
 /*buttons*/
@@ -139,8 +144,14 @@ buttonSeeResults.addEventListener('click', seeResults);
 
 var resultsScreenSelector = document.querySelector("#results-screen");
 
-/*buttons*/
+/*result board text elements*/
+var winnerHorse = document.querySelector("#winner-horse");
+var playerLineResults = document.getElementsByClassName("player-line-result");
+var playerNameResults = document.getElementsByClassName("player-name-result");
+var giveOrTakes = document.getElementsByClassName("give-or-take");
+var playerBetResults = document.getElementsByClassName("player-bet-result");
 
+/*buttons*/
 var buttonBackToRace = document.querySelector("#back-to-race");
 buttonBackToRace.addEventListener('click', backToRace);
 var buttonNewRace = document.querySelector("#new-race");
@@ -357,6 +368,9 @@ function requestAnswered(){
 			loadSideTrackCards();
 			loadAces();
 			raceInfos.raceGoing = true; //la course peut commencer
+
+			//loadResults(); //DEV LINE TO REMOVE IN THE END !!! /!\
+
 			break;
 		default:
 			break;
@@ -437,12 +451,10 @@ function nextTurn () {
 			},800);
 			coolDownNextTurn();
 		},800);
-		
-		/*
-		- print comment
-		- check if someone won the race
-		*/
+	}
 
+	if (raceInfos.raceOver) {
+		gameCommentary.innerHTML = "La course est finie, allez donc voir les résultats au lieu de rester planté là !";
 	}
 }
 
@@ -566,7 +578,7 @@ function sayAComment() {
 		comment += callHorse(raceInfos.firstId) + " gagne la course !!!";
 		commentMade = true;
 	} else if (raceInfos.firstId != prevRaceInfos.firstId) {
-		comment += callHorse(raceInfos.firstId) + " prend la tête de course !!";
+		comment += callHorse(raceInfos.firstId) + " prends la tête de course !!";
 		commentMade = true;
 	} else if (raceInfos.lastId != prevRaceInfos.lastId && Math.random() < 0.4) {
 		comment += callHorse(raceInfos.lastId) + " passe dernier...";
@@ -622,7 +634,7 @@ function seeResults() {
 	/*Load the results screen when button is pressed*/
 	if (raceInfos.raceOver) {
 		activeScreen = "results";
-
+		loadResults();
 		gameScreenSelector.classList.remove("enter-screen-left");
 		gameScreenSelector.classList.remove("enter-screen-right");
 		gameScreenSelector.classList.add("exit-screen-left");
@@ -635,7 +647,7 @@ function seeResults() {
 	   	}, 200);
 
 	} else {
-		gameCommentary.innerHTML = "Pas si vite l'ami, attends que la course soit finie !";
+		gameCommentary.innerHTML = "Pas si vite l'ami, attendez que la course soit finie !";
 	}
 }
 
@@ -644,9 +656,28 @@ function seeResults() {
  results functions
 ------------------- */
 
+function loadResults() {
+	console.log("lollol");
+	console.log(playerLineResults);
+	var tmpWinSuit = aces[raceInfos.firstId].suit
+	winnerHorse.innerHTML = "" + suitInSymbols[tmpWinSuit] + " Le gagnant de la course est le " + suitInFrench[tmpWinSuit] + " ! " + suitInSymbols[tmpWinSuit];
+	for (i=0; i<playersData.length; i++) {
+		playerNameResults[i].innerHTML = playersData[i].name;
+		if (playersData[i].horse == tmpWinSuit) {
+			giveOrTakes[i].innerHTML = " distribue " + (playersData[i].bet * 2) + " coups ";
+			giveOrTakes[i].classList.add("give-number");
+		} else {
+			giveOrTakes[i].innerHTML = " bois " + (playersData[i].bet) + " coups ";
+			giveOrTakes[i].classList.add("drink-number");
+		}
+		playerBetResults[i].innerHTML = "(il a misé " + playersData[i].bet + " sur le " + suitInFrench[playersData[i].horse] + ")";
+		playerLineResults[i].classList.remove("hidden");
+	}
+}
+
+
 function backToRace() {
-	/* Back to Race */
-	activeScreen="game";
+	activeScreen = "game";
 
 	resultsScreenSelector.classList.remove("enter-screen-left");
 	resultsScreenSelector.classList.remove("enter-screen-right");
@@ -662,7 +693,7 @@ function backToRace() {
 
 function backToMenu () {
 
-	activeScreen="menu";
+	activeScreen = "menu";
 
 	resultsScreenSelector.classList.remove("enter-screen-left");
 	resultsScreenSelector.classList.remove("enter-screen-right");
