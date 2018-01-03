@@ -136,24 +136,23 @@ body {
     opacity: 0;
 }
 
+@keyframes exitScreenRight {
+	0% {
+		transform: scale(1);
+		opacity: 1;
+	}
+	100% { 
+		transform: scale(0.9) translateX(500px);
+		opacity: 0;
+	}
+}
+
 .exit-screen-left {
     animation-name: exitScreenLeft;
     animation-duration: 0.5s;
     opacity: 0;
 }
 
-
-@keyframes exitScreenRight {
-	0% {
-		transform: scale(0.9) translateX(500px);
-		opacity: 0;	
-	}
-	
-	100% { 
-		transform: scale(1);
-		opacity: 1;
-	}
-}
 
 @keyframes exitScreenLeft {
 	0% {
@@ -172,12 +171,6 @@ body {
     opacity: 1;
 }
 
-.enter-screen-left {
-    animation-name: enterScreenLeft;
-    animation-duration: 0.5s;
-    opacity: 1;
-}
-
 @keyframes enterScreenRight {
 	0% {
 		transform: scale(0.9) translateX(500px);
@@ -188,6 +181,12 @@ body {
 		transform: scale(1);
 		opacity: 1;
 	}
+}
+
+.enter-screen-left {
+    animation-name: enterScreenLeft;
+    animation-duration: 0.5s;
+    opacity: 1;
 }
 
 @keyframes enterScreenLeft {
@@ -545,7 +544,7 @@ body {
  Results screen
 -------------- */	
 
-.results-hidden {
+#results-screen {
 	display: block;
 	text-align: center;
 	color: #FFFFFF;

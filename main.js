@@ -125,10 +125,10 @@ var resultsScreenSelector = document.querySelector("#results-screen");
 
 /*buttons*/
 
-var backToRace = document.querySelector("#back-to-race");
-backToRace.addEventListener('click', backTo);
-var newRace = document.querySelector("#new-race");
-newRace.addEventListener('click', backToMenu);
+var buttonBackToRace = document.querySelector("#back-to-race");
+buttonBackToRace.addEventListener('click', backToRace);
+var buttonNewRace = document.querySelector("#new-race");
+buttonNewRace.addEventListener('click', backToMenu);
 
 /* ---------------
  common functions
@@ -190,7 +190,7 @@ function showRules () {
 }
 
 function goToTop () {
-	document.documentElement.scrollTop = 0;
+	window.scrollTo(0,0);
 }
 
 function startRace () {
@@ -240,13 +240,10 @@ function getPlayersData () {
 ---------------- */
 
 function initGameScreen () {
-	showGameScreen();
 	activeScreen = "game";
-	setupAPI();
-}
-
-function showGameScreen() {
-	/*enable the game screen*/
+	
+	menuScreenSelector.classList.remove("enter-screen-right");
+	menuScreenSelector.classList.remove("enter-screen-left");
 
 	setTimeout(function () {
 		gameScreenSelector.classList.remove("hidden");
@@ -254,6 +251,8 @@ function showGameScreen() {
 		insertCardsinHolders();
 		resizeGameBoard();	
 	},200);
+
+	setupAPI();
 }
 
 function setupAPI() {
@@ -630,51 +629,53 @@ function seeResults() {
 	/*Load the results screen*/
 	activeScreen = "results";
 
+	gameScreenSelector.classList.remove("enter-screen-left");
+	gameScreenSelector.classList.remove("enter-screen-right");
 	gameScreenSelector.classList.add("exit-screen-left");
+
+	resultsScreenSelector.classList.add("enter-screen-right");
+	
 	setTimeout(function () {
 		gameScreenSelector.classList.add("hidden");
-   	}, 400);
-
-	setTimeout(function () {
 		resultsScreenSelector.classList.remove("hidden");
-	}, 400);
-	resultsScreenSelector.classList.add("enter-screen-right");
+   	}, 200);
 
 	var winner = raceInfos.firstId
+	
 	//console.log("porrrrr");
 
 }
 
 /* Functions for buttons in results sreen */
 
-function backTo() {
+function backToRace() {
 	/* Back to Race */
 	activeScreen="game";
 
-	setTimeout(function () {
-		gameScreenSelector.classList.remove("hidden");
-	}, 400);
+	resultsScreenSelector.classList.remove("enter-screen-left");
+	resultsScreenSelector.classList.remove("enter-screen-right");
+	resultsScreenSelector.classList.add("exit-screen-right");
+
 	gameScreenSelector.classList.add("enter-screen-left");
 
-	resultsScreenSelector.classList.add("exit-screen-right");
 	setTimeout(function () {
 		resultsScreenSelector.classList.add("hidden");
-	}, 400);
-
+		gameScreenSelector.classList.remove("hidden");
+	}, 200);
 }
 
 function backToMenu () {
 
 	activeScreen="menu";
 
+	resultsScreenSelector.classList.remove("enter-screen-left");
+	resultsScreenSelector.classList.remove("enter-screen-right");
 	resultsScreenSelector.classList.add("exit-screen-right");
-	setTimeout(function () {
-		resultsScreenSelector.classList.add("hidden");
-	}, 400);
 
 	menuScreenSelector.classList.add("enter-screen-left");
-	setTimeout(function () {	
-		menuScreenSelector.classList.remove("hidden");
-	}, 400);
 
+	setTimeout(function () {
+		resultsScreenSelector.classList.add("hidden");
+		location.reload();
+	}, 400);
 }	
