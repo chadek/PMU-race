@@ -39,14 +39,14 @@ body {
 	position: absolute;
 	z-index: -10;
 	width: 500px;
-	transform: translateX(750px) translateY(140px);
+	transform: translateX(770px) translateY(140px);
 }
 
 #cards-img {
 	position: absolute;
 	z-index: -10;
 	width: 300px;
-	transform: translateX(-330px) translateY(120px);
+	transform: translateX(-350px) translateY(120px);
 }
 
 p {
@@ -320,7 +320,26 @@ p {
 	justify-content: center;
 }
 
-.rule-title {
+#rules {
+    animation-name: displayRules;
+    animation-duration: 0.6s;
+    opacity: 1;
+}
+
+@keyframes displayRules {
+	0% {
+		max-height: 1em;
+		opacity: 0;
+	}
+	50% {
+		opacity: 0;
+	}
+	80% {
+		max-height: 999px;
+	}
+	100% {
+		opacity: 1;
+	}
 
 }
 

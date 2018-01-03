@@ -35,6 +35,8 @@ buttonStart.addEventListener('click', startRace);
 var buttonTop = document.querySelector("#button-top");
 buttonTop.addEventListener('click', goToTop);
 
+var rulesSelector = document.querySelector("#rules");
+
 var playersData = [];
 
 /* -------------------------------
@@ -255,12 +257,13 @@ function hideMenuPlayer(i) {
 function showRules () {
 	/*show the game rules at the bottom of the menu screen*/
 	event.preventDefault();
-	javascript:location.href = '#rules';
-}
+	rulesSelector.classList.remove("hidden");
+	rulesSelector.scrollIntoView({ behavior: 'smooth' });
+	}
 
 
 function goToTop () {
-	window.scrollTo(0,0);
+	document.querySelector('#site-title').scrollIntoView({ behavior: 'smooth' });
 }
 
 
