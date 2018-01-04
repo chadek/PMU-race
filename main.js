@@ -10,8 +10,6 @@ règles de syntaxe :
  common variables
 ------------------ */
 
-var debug = true;
-
 var activeScreen = "menu";
 
 
@@ -295,10 +293,6 @@ function getPlayersData () {
 
 		playersData.push(currPlayer);
 	}
-	if (debug) {
-		console.log("playersData : ");
-		console.log(playersData);
-	}
 }
 
 function hideMenuScreen() {
@@ -346,11 +340,7 @@ request.onreadystatechange = function() {
 function requestAnswered(){
 	/*do stuff with the request - is also used as part 2 of initGameScreen function*/
 	requestData = JSON.parse(request.responseText);
-	if (debug) {
-		console.log("APIState : " + APIState);
-		console.log("requestData : ");
-		console.log(requestData);
-	}
+
 	switch (APIState) {
 	  	case "init":
 			deckId = requestData.deck_id;
@@ -359,21 +349,10 @@ function requestAnswered(){
 		case "gameDrawn":
 			deckCards = requestData.cards;
 			makeAcesPile();
-			if (debug) {
-				console.log("aces :");
-				console.log(aces);
-			}
 			makeSideTrackPile();
-			if (debug) {
-				console.log("sideTrackDeck :");
-				console.log(sideTrackDeck);
-			}
 			loadSideTrackCards();
 			loadAces();
-			raceInfos.raceGoing = true; //la course peut commencer
-
-			//loadResults(); //DEV LINE TO REMOVE IN THE END !!! /!\
-
+			raceInfos.raceGoing = true; //the race can start
 			break;
 		default:
 			break;
@@ -423,7 +402,6 @@ function nextTurn () {
 	if (nextTurnAvailable && raceInfos.raceGoing) {
 		nextTurnAvailable = false;
 		raceInfos.nbTurns++;
-		if (debug) {console.log("nextTurn");}
 		loadDropCard();
 		
 		updateDeck();
@@ -433,8 +411,6 @@ function nextTurn () {
 			updateRaceInfos();
 
 			setTimeout(function () {
-				console.log("prevRaceInfos");
-				console.log(prevRaceInfos);
 				if (raceInfos.nextSideCard > prevRaceInfos.nextSideCard) {	
 					updateTrackSide();
 
@@ -520,7 +496,6 @@ function moveAceFwd() {
 
 function updateRaceInfos () {
 	for (i=0; i<4; i++) {
-		console.log("aces["+i+"].position" + aces[i].position);
 		if (aces[raceInfos.lastId].position > aces[i].position) {
 			raceInfos.lastId = i;
 		}
@@ -529,8 +504,6 @@ function updateRaceInfos () {
 		}
 	}
 	raceInfos.nextSideCard = Math.max(raceInfos.nextSideCard, aces[raceInfos.lastId].position-1);
-	console.log("raceInfos");
-	console.log(raceInfos);
 }
 
 function updateTrackSide() {
@@ -563,14 +536,12 @@ function moveAceBkw() {
 }
 
 function checkIfRaceIsOver () {
-	console.log("aces[raceInfos.firstId].position : " + aces[raceInfos.firstId].position);
 	if (aces[raceInfos.firstId].position >= 6) {
 		raceInfos.raceGoing = false;
 	}
 }
 
 function sayAComment() {
-	console.log("saying a comment");
 	commentMade = false;
 	comment = commentPrefix[Math.floor(Math.random() * commentPrefix.length)];
 
@@ -622,7 +593,6 @@ function callHorse (i) {
 
 function endRace() {
 	raceInfos.raceOver = true;
-	console.log ("WIIIIIIIIN");
 }
 
 function coolDownNextTurn() {
@@ -660,8 +630,6 @@ function seeResults() {
 ------------------- */
 
 function loadResults() {
-	console.log("lollol");
-	console.log(playerLineResults);
 	var tmpWinSuit = aces[raceInfos.firstId].suit
 	winnerHorse.innerHTML = "" + suitInSymbols[tmpWinSuit] + " Le gagnant de la course est le " + suitInFrench[tmpWinSuit] + " ! " + suitInSymbols[tmpWinSuit];
 	for (i=0; i<playersData.length; i++) {
