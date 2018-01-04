@@ -254,7 +254,6 @@ function hideMenuPlayer(i) {
 
 function showRules () {
 	/*show the game rules at the bottom of the menu screen*/
-	event.preventDefault();
 	rulesSelector.classList.remove("hidden");
 	rulesSelector.scrollIntoView({ behavior: 'smooth' });
 	}
@@ -267,7 +266,6 @@ function goToTop () {
 
 function startRace () {
 	/*go to game screen & start the race*/
-	event.preventDefault();
 	getPlayersData();
 	hideMenuScreen();
 	initGameScreen();
