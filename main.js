@@ -431,7 +431,7 @@ function nextTurn () {
 	}
 
 	if (raceInfos.raceOver) {
-		gameCommentary.innerHTML = "La course est finie, allez donc voir les résultats au lieu de rester planté là !";
+		gameCommentary.innerHTML = "La course est finie, allez donc voir les résultats au lieu de rester planter là !";
 	}
 }
 
