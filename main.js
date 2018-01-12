@@ -559,19 +559,19 @@ function sayAComment() {
 
 	else {
 		for (i=0; i<4; i++) {
-			if (i != raceInfos.firstId && aces[i].position == aces[raceInfos.firstId].position && !commentMade&& Math.random() < 0.8) {
+			if (i != raceInfos.firstId && aces[i].position == aces[raceInfos.firstId].position && !commentMade && Math.random() < 0.8) {
 				comment += callHorse(i) + " et " + callHorse(raceInfos.firstId) + " se battent pour la première place ! Allez !!";
 				commentMade = true;
 			}
 
-			if (i != raceInfos.lastId && aces[i].position == aces[raceInfos.lastId].position && !commentMade  && Math.random() < 0.4) {
+			if (i != raceInfos.lastId && aces[i].position == aces[raceInfos.lastId].position && !commentMade && Math.random() < 0.4) {
 				comment += callHorse(i) + " et " + callHorse(raceInfos.lastId) + " sont tous les 2 derniers ... Il faut se ressaisir !";
 				commentMade = true;
 			} 
 		}
 	}
 
-	if (!commentMade  && Math.random() < 0.7) {
+	if (!commentMade && Math.random() < 0.7) {
 		comment += callHorse(raceInfos.firstId) + " conserve sa première place...";
 	} else if (!commentMade) {
 		comment += callHorse(raceInfos.lastId) + " est dernier... Du nerf l'ami !";
@@ -674,4 +674,4 @@ function backToMenu () {
 		resultsScreenSelector.classList.add("hidden");
 		location.reload();
 	}, 400);
-}	
+}
