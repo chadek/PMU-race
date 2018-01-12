@@ -431,7 +431,7 @@ function nextTurn () {
 	}
 
 	if (raceInfos.raceOver) {
-		gameCommentary.innerHTML = "La course est finie, allez donc voir les résultats au lieu de rester planter là !";
+		gameCommentary.innerHTML = "La course est finie, allez donc voir les résultats au lieu de rester plantés là !";
 	}
 }
 
@@ -550,7 +550,7 @@ function sayAComment() {
 		comment += callHorse(raceInfos.firstId) + " gagne la course !!!";
 		commentMade = true;
 	} else if (raceInfos.firstId != prevRaceInfos.firstId) {
-		comment += callHorse(raceInfos.firstId) + " prends la tête de course !!";
+		comment += callHorse(raceInfos.firstId) + " prend la tête de course !!";
 		commentMade = true;
 	} else if (raceInfos.lastId != prevRaceInfos.lastId && Math.random() < 0.4) {
 		comment += callHorse(raceInfos.lastId) + " passe dernier...";
@@ -597,7 +597,7 @@ function coolDownNextTurn() {
 	/*wait some time before enabling the next turn*/
 	setTimeout(function () {
 		nextTurnAvailable = true;
-	},500);
+	},820);
 }
 
 
@@ -636,7 +636,7 @@ function loadResults() {
 			giveOrTakes[i].innerHTML = " distribue " + (playersData[i].bet * 2) + " coups ";
 			giveOrTakes[i].classList.add("give-number");
 		} else {
-			giveOrTakes[i].innerHTML = " bois " + (playersData[i].bet) + " coups ";
+			giveOrTakes[i].innerHTML = " boit " + (playersData[i].bet) + " coups ";
 			giveOrTakes[i].classList.add("drink-number");
 		}
 		playerBetResults[i].innerHTML = "(il a misé " + playersData[i].bet + " sur le " + suitInFrench[playersData[i].horse] + ")";
